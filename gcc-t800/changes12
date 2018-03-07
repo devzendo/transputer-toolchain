@@ -1,0 +1,2 @@
+Two bugs fixed: incorrect character comparisons and incorrect
+sign-extensions.  Both generic and Parix models are affected.

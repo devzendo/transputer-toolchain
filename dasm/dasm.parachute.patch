@@ -1,0 +1,39 @@
+Binary files dasm.orig/dasm and dasm.mjg/dasm differ
+diff -bruN dasm.orig/inmos.h dasm.mjg/inmos.h
+--- dasm.orig/inmos.h	1996-10-30 00:25:58.000000000 +0000
++++ dasm.mjg/inmos.h	2005-09-15 07:43:55.125854736 +0100
+@@ -23,11 +23,15 @@
+ 
+ #define INT32 long
+ 
++/* MJG Commented these out, as they conflict with endian.h on Ubuntu, and are
++ * not used in dasm anyway.
++ *
+ #ifdef SUN3
+ #define BIG_ENDIAN
+ #else
+ #define LITTLE_ENDIAN
+ #endif
++ */
+ 
+ #ifndef TRUE 
+ #define TRUE 1
+diff -bruN dasm.orig/Makefile dasm.mjg/Makefile
+--- dasm.orig/Makefile	1996-10-30 00:48:34.000000000 +0000
++++ dasm.mjg/Makefile	2005-09-15 07:38:39.838785656 +0100
+@@ -3,8 +3,15 @@
+ #    ftp://ftp.wizzy.com/wizzy/dasm.zip
+ #
+ 
++PREFIX=/usr/local/t800
++BINDIR=$(PREFIX)/bin
++
+ dasm:    dasm.c opcodes.h inmos.h
+ 	 gcc -o dasm dasm.c
+ 
++install:	dasm
++	[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
++	install -s -o root -g bin -m755 dasm $(BINDIR)
++
+ # end of makefile
+ 

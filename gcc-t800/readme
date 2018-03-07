@@ -1,0 +1,22 @@
+Welcome!  Here lives gcc-t800, the port of GNU C Compiler to the
+transputer architecture.  Naming conventions for files beneath this
+directory are as follows:
+
+  gcc-2.x.x-t800.NNN.dif.gz is the transputer port in the form of
+  context diff against the official GCC distribution, gcc-2.x.x.tar.gz.
+  You most probably want to pick the file with largest NNN.
+
+  gcc-2.x.x.tar.gz is the official GCC distribution, version 2.x.x.
+  You can download it from here, but it is large.  So you probably
+  will be happier downloading it from the nearest to you FTP site
+  that carries GNU software.
+
+  patchNNN.gz contains diff between gcc-2.x.x-t800.MMM and
+  gcc-2.x.x-t800.NNN, where MMM=NNN-1.  This is meant for upgrades.
+
+  changesNNN contain a short overview of the changes in version
+  gcc-2.x.x-t800.NNN.
+
+gcc-2.7.2-t800.1 is roughly equivalent to gcc-2.6.3-t800.10
+transputer-wise.  The 2.6.3 branch is not expected to be developed
+further, except for bugfixes.

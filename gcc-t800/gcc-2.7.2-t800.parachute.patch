@@ -1,0 +1,119 @@
+--- gcc-2.7.2-t800.orig/configure	2005-09-12 08:17:25.959181344 +0100
++++ gcc-2.7.2/configure	2005-09-12 08:18:22.930520384 +0100
+@@ -999,7 +999,7 @@
+ 		broken_install=yes
+ 		gnu_ld=yes
+ 		;;
+-	i[345]86-*-linux*)		# Intel 80386's running Linux
++	i[3456]86-*-linux*)		# Intel 80386's running Linux
+ 		cpu_type=i386		# with ELF format
+ 		xm_file=i386/xm-linux.h
+ 		xmake_file=x-linux
+--- gcc-2.7.2-t800.orig/config.guess	1995-11-26 19:56:22.000000000 +0000
++++ gcc-2.7.2/config.guess	2005-09-12 18:37:45.895586744 +0100
+@@ -42,6 +42,9 @@
+ fi
+ 
+ UNAME_MACHINE=`(uname -m) 2>/dev/null` || UNAME_MACHINE=unknown
++if [ "$UNAME_MACHINE" = "i686" ]; then
++	UNAME_MACHINE="i586"
++fi
+ UNAME_RELEASE=`(uname -r) 2>/dev/null` || UNAME_RELEASE=unknown
+ UNAME_SYSTEM=`(uname -s) 2>/dev/null` || UNAME_SYSTEM=unknown
+ UNAME_VERSION=`(uname -v) 2>/dev/null` || UNAME_VERSION=unknown
+@@ -319,11 +322,11 @@
+ 	# The BFD linker knows what the default object file format is, so
+ 	# first see if it will tell us.
+ 	ld_help_string=`ld --help 2>&1`
+-	if echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: elf_i[345]86"; then
++	if echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: elf_i[3456]86"; then
+ 	  echo "${UNAME_MACHINE}-unknown-linux" ; exit 0
+-	elif echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: i[345]86linux"; then
++	elif echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: i[3456]86linux"; then
+ 	  echo "${UNAME_MACHINE}-unknown-linuxaout" ; exit 0
+-	elif echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: i[345]86coff"; then
++	elif echo $ld_help_string | grep >/dev/null 2>&1 "supported emulations: i[3456]86coff"; then
+ 	  echo "${UNAME_MACHINE}-unknown-linuxcoff" ; exit 0
+ 	elif test "${UNAME_MACHINE}" = "alpha" ; then
+ 	  echo alpha-unknown-linux ; exit 0
+--- gcc-2.7.2-t800.orig/config.sub	2005-09-12 08:17:25.000000000 +0100
++++ gcc-2.7.2/config.sub	2005-09-12 18:41:08.529781664 +0100
+@@ -129,7 +129,7 @@
+ case $basic_machine in
+ 	# Recognize the basic CPU types without company name.
+ 	# Some are omitted here because they have special meanings below.
+-	tahoe | i[345]86 | i860 | m68k | m68000 | m88k | ns32k | arm \
++	tahoe | i[3456]86 | i860 | m68k | m68000 | m88k | ns32k | arm \
+ 		| arme[lb] | pyramid \
+ 		| tron | a29k | 580 | i960 | h8300 | hppa1.0 | hppa1.1 \
+ 		| alpha | we32k | ns16k | clipper | sparclite | i370 | sh \
+@@ -145,7 +145,7 @@
+ 		exit 1
+ 		;;
+ 	# Recognize the basic CPU types with company name.
+-	vax-* | tahoe-* | i[345]86-* | i860-* | m68k-* | m68000-* | m88k-* \
++	vax-* | tahoe-* | i[3456]86-* | i860-* | m68k-* | m68000-* | m88k-* \
+ 	      | sparc-* | ns32k-* | fx80-* | arm-* | c[123]* \
+ 	      | mips-* | pyramid-* | tron-* | a29k-* | romp-* | rs6000-* | power-* \
+ 	      | none-* | 580-* | cray2-* | h8300-* | i960-* | xmp-* | ymp-* \
+--- gcc-2.7.2-t800.orig/config/t800/t800.h	2005-09-12 08:17:25.000000000 +0100
++++ gcc-2.7.2/config/t800/t800.h	2005-09-12 18:47:49.740788320 +0100
+@@ -761,7 +761,7 @@
+ /* See the comment for STACK_POINTER_OFFSET above */
+ /* #define STACK_DYNAMIC_OFFSET(FUNDECL) */
+ 
+-#define DYNAMIC_CHAIN_ADDRESS(FRAMEADDR)  ((void *)abort ())
++#define DYNAMIC_CHAIN_ADDRESS(FRAMEADDR) 0; ((void)abort ())
+ /*-#define SETUP_FRAME_ADDRESSES () */
+ /*-#define RETURN_ADDR_RTX (count, frameaddr) */
+ /*-#define RETURN_ADDR_IN_PREVIOUS_FRAME */
+--- gcc-2.7.2-t800.orig/config/t800/t800.md	2005-09-12 08:17:25.000000000 +0100
++++ gcc-2.7.2/config/t800/t800.md	2005-09-13 08:25:01.000000000 +0100
+@@ -1266,12 +1266,15 @@
+                           (match_operand:SI 3 "wsub_scale_operand" ""))
+                  (match_operand:SI 1 "ABCreg_operand" "a")))]
+   "T800_DISTINCT_REGS (operands[1], operands[2])"
+-  "*return
++  "*char *retval =
+     INTVAL (operands[3]) == UNITS_PER_WORD    ? \"wsub\"  :
+     INTVAL (operands[3]) == UNITS_PER_WORD*2  ? \"wsubdb\":
+     TARGET_HAVE_SIXTEEN
+       && INTVAL (operands[3]) == UNITS_PER_WORD/2  ? \"ssub\":
+-    (char *) abort();"
++    (char *) 0;
++   if (retval == 0)
++      abort();
++   return retval;"
+   [(set (attr "popped_inputs") (const_int 6))])
+ 
+ 
+@@ -1658,13 +1661,7 @@
+   "TARGET_HAVE_FPU
+    && TARGET_HAVE_FPENTRY
+    && T800_DISTINCT_REGS (operands[1], operands[2])"
+-  "fpremfirst
+-	eqc 0
+-	cj LF%=2
+-LF%=1
+-	fpremstep
+-	cj LF%=1
+-LF%=2"
++  "fpremfirst\;eqc 0\;cj LF%=2\;LF%=1\;fpremstep\;cj LF%=1\;LF%=2"
+   [(set (attr "popped_inputs") (const_int 6))])
+ 
+ 
+@@ -1686,13 +1683,7 @@
+   "TARGET_HAVE_FPU
+    && TARGET_HAVE_FPENTRY
+    && T800_DISTINCT_REGS (operands[1], operands[2])"
+-  "fpremfirst
+-	eqc 0
+-	cj LF%=2
+-LF%=1
+-	fpremstep
+-	cj LF%=1
+-LF%=2"
++  "fpremfirst\;eqc 0\;cj LF%=2\;LF%=1\;fpremstep\;cj LF%=1\;LF%=2"
+   [(set (attr "popped_inputs") (const_int 6))])
+ 
+ (define_insn ""

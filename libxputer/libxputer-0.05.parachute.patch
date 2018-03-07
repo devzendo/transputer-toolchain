@@ -1,0 +1,12 @@
+diff -bruN libxputer.orig/Makefile libxputer/Makefile
+--- libxputer.orig/Makefile	1996-10-27 15:36:25.000000000 +0000
++++ libxputer/Makefile	2005-06-29 07:32:25.000000000 +0100
+@@ -7,7 +7,7 @@
+ OBJS		= alt.o process.o sema.o misc.o
+ TARGET 		= libxputer.a
+ 
+-PREFIX		= /usr/t800
++PREFIX		= /usr/local/t800
+ LIBDIR		= $(PREFIX)/lib
+ INCDIR		= $(PREFIX)/include
+ 

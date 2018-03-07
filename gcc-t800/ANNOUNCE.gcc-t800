@@ -1,0 +1,39 @@
+
+	ALPHA release of gcc-t800
+
+
+gcc-t800 is yet another port of GNU C Compiler to Inmos transputer
+family.  Being a derivative of GCC, it is distributed under the GNU
+General Public License.
+
+This ALPHA release is available as a patch against the "official" GCC
+2.7.2 distribution (gcc-2.7.2.tar.gz), which is available from
+prep.ai.mit.edu and its numerous mirrors.  This patch allows one to
+build a cross compiler which runs on a host capable of running GCC in
+general and produces transputer assembly language output.  The patch
+is available from <ftp://ftp.botik.ru/pub/local/gcc-t800/>.
+
+In order to actually get the compiler to produce executables, you also
+need a cross-assembler and linker.  One package including those is
+TTOOLS; check <http://www.botik.ru/~sizif/ttools/>, or
+<ftp://ftp.botik.ru/pub/local/ttools>.
+
+You can also find gcc-t800 and TTOOLS at the mirror in UK -- thanks to
+Dave Beckett, <D.J.Beckett@ukc.ac.uk>:
+ftp://unix.hensa.ac.uk/pub/parallel/transputer/software/compilers/gcc/pereslavl/
+http://www.hensa.ac.uk/parallel/transputer/software/compilers/gcc/pereslavl/
+
+Unfortunately, (gcc-t800 + TTOOLS) still are NOT a plug-and-play
+development environment.  I have not ported any libraries.  Floating
+point works only on transputers with FP unit (t800,t805,t9000) --
+there is no FPU emulation library yet.  The compiler still lacks
+debugging support, and there is no debugger yet (although one of our
+people thinks about porting GDB).
+
+Nonetheless, I hope you will be able to make good use of it.
+
+Good luck!
+
+
+Yury Shevchuk
+<sizif@botik.ru>

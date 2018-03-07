@@ -1,0 +1,284 @@
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/ast/ast.c ttools-2.0beta2.parachute/ast/ast.c
+--- ttools-2.0beta2.orig/ast/ast.c	1995-12-22 12:24:38.000000000 +0000
++++ ttools-2.0beta2.parachute/ast/ast.c	2005-10-06 18:43:25.000000000 +0100
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include "ast.h"
++#include <errno.h>
+ 
+ static void output_nametable (void);
+ static void output_needs (void);
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/ast/scan.l ttools-2.0beta2.parachute/ast/scan.l
+--- ttools-2.0beta2.orig/ast/scan.l	1996-01-16 16:05:45.000000000 +0000
++++ ttools-2.0beta2.parachute/ast/scan.l	2005-11-07 18:45:29.000000000 +0000
+@@ -12,6 +12,7 @@
+ %{
+ #include "ast.h"
+ #include "y.tab.h"
++#include <errno.h>
+ 
+ char *input_filename = "<UNKNOWN>";
+ int input_lineno = 1;
+@@ -254,6 +255,10 @@
+ "lsx"		CMDDEF (0xf9, TOK_CMD_INDIR, T9000|T450)
+ "cs"		CMDDEF (0xfa, TOK_CMD_INDIR, T9000|T450)
+ "csu"		CMDDEF (0xfb, TOK_CMD_INDIR, T9000|T450)
++"togglemonitor"		CMDDEF (0xfc, TOK_CMD_INDIR, T800EMUL)
++"toggledisasm"		CMDDEF (0xfd, TOK_CMD_INDIR, T800EMUL)
++"terminate"		CMDDEF (0xfe, TOK_CMD_INDIR, T800EMUL)
++"marker"		CMDDEF (0xff, TOK_CMD_INDIR, T800EMUL)
+ "lddevid"	CMDDEF (0x17c, TOK_CMD_INDIR, LDDEVID)
+ 
+ "fpstall"	CMDDEF (-0x01, TOK_CMD_INDIR, T9000)
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/lit/lit.c ttools-2.0beta2.parachute/lit/lit.c
+--- ttools-2.0beta2.orig/lit/lit.c	1997-03-29 21:54:13.000000000 +0000
++++ ttools-2.0beta2.parachute/lit/lit.c	2005-10-06 18:43:25.000000000 +0100
+@@ -6,11 +6,11 @@
+  */
+ 
+ #include "lit.h"
+-
++#include <errno.h>
+ 
+ static void output_stabs ();
+ static void ifile_add (char *fname);
+-static void ifile_add_member (struct ifile *master, fpos_t lo, fpos_t hi, char *);
++static void ifile_add_member (struct ifile *master, long lo, long hi, char *);
+ static FILE *ifile_fopen (char *fname, char *mode);
+ static int ifile_isarchive (struct ifile *);
+ static void ifile_open_archive (struct ifile *);
+@@ -49,9 +49,9 @@
+     FILE *stream_proper;	/* open file, or NULL, if closed temporarily */
+     FILE **stream;		/* pointer to stream_proper in this or the
+ 				   archive master ifile */
+-    fpos_t lo;			/* start offset; non-0 for archive members */
+-    fpos_t hi;			/* end offset; ==lo+file_length */
+-    fpos_t pos;			/* position saved after a pass */
++    long lo;			/* start offset; non-0 for archive members */
++    long hi;			/* end offset; ==lo+file_length */
++    long pos;			/* position saved after a pass */
+     name *names;		/* index-to-name mapping table */
+     int nnames;			/* number of entries in `names' */
+     expr *elements;		/* index-to-element mapping table */
+@@ -702,7 +702,7 @@
+    ifile `master' */
+ 
+ static void
+-ifile_add_member (struct ifile *master, fpos_t lo, fpos_t hi, char *membname)
++ifile_add_member (struct ifile *master, long lo, long hi, char *membname)
+ {
+     struct ifile *ifi;
+ 
+@@ -800,7 +800,7 @@
+ 	fatal ("cannot fseek in `%s': %s\n", ifi->fname, strerror (errno));
+ 
+     while (fread (&header, sizeof (header), 1, *ifi->stream) == 1) {
+-	fpos_t startpos = ftell (*ifi->stream);
++	long startpos = ftell (*ifi->stream);
+ 	long sz;
+ 	char *p;
+ 
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/lit/options.h ttools-2.0beta2.parachute/lit/options.h
+--- ttools-2.0beta2.orig/lit/options.h	1996-02-25 15:48:07.000000000 +0000
++++ ttools-2.0beta2.parachute/lit/options.h	2005-10-06 18:43:25.000000000 +0100
+@@ -31,7 +31,7 @@
+ /* end of common options; lit-specific options follow */
+ 
+ DEFINE_OPTION ("segment-align", required_argument, NULL, 'a', "\
+--a N, --segment-align N	assume segments will be loaded at the multiple-of-N
++-a N, --segment-align N	assume segments will be loaded at the multiple-of-N \
+                         boundary; default 4\n")
+ 
+ DEFINE_OPTION ("hook", required_argument, NULL, 'h', "\
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/Makefile ttools-2.0beta2.parachute/Makefile
+--- ttools-2.0beta2.orig/Makefile	1997-03-29 21:55:24.000000000 +0000
++++ ttools-2.0beta2.parachute/Makefile	2005-10-06 18:43:25.000000000 +0100
+@@ -11,19 +11,19 @@
+ # A directory which appears in the PATH; the tools are installed
+ # there under native names (ast, lit, ...) for command-line usage.
+ 
+-BINDIR=/usr/local/bin
++BINDIR=/usr/local/t800/bin
+ #BINDIR=/usr/bin
+ 
+ # Cross-tools directory with subdirs: bin, lib, include, ...
+ # The tools are symlinked there under traditional names (as, ld),
+ # as GCC expects to see them.
+ 
+-TOOLDIR=/usr/local/t800
++TOOLDIR=/usr/local/t800/t800
+ #TOOLDIR=/usr/t800
+ 
+ # Where to put manpages
+ 
+-MANDIR=/usr/local/man
++MANDIR=/usr/local/t800/man
+ #MANDIR=/usr/man
+ 
+ # Where is ar on your system?  We'll use it for target libraries.
+@@ -85,7 +85,7 @@
+ # 'production' flags
+ CFLAGS_DEB='-fomit-frame-pointer'
+ CFLAGS_ANY='-pipe'
+-CFLAGS_OPT='-O2 -m486'
++CFLAGS_OPT='-O2 -march=i486'
+ CFLAGS_WRN='-Wall'
+ 
+ # 'development' flags: used for `make devel'
+@@ -200,13 +200,16 @@
+ 	@read
+ 
+ install: all
++	#
++	[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
++	[ -d $(TOOLDIR) ] || mkdir -p $(TOOLDIR)
++	#
+ 	install -s -o root -g bin -m755 ast/ast $(BINDIR)
+ 	install -s -o root -g bin -m755 lit/lit $(BINDIR)
+ 	install -s -o root -g bin -m755 dast/dast $(BINDIR)
+ 	install -s -o root -g bin -m755 litdump/litdump $(BINDIR)
+-	install -s -o root -g bin -m755 oserver/oserver $(BINDIR)
++	# install -s -o root -g bin -m755 oserver/oserver $(BINDIR)
+ 	#
+-	[ -d $(TOOLDIR) ] || mkdir $(TOOLDIR)
+ 	[ -d $(TOOLDIR)/bin ] || mkdir $(TOOLDIR)/bin
+ 	[ -d $(TOOLDIR)/lib ] || mkdir $(TOOLDIR)/lib
+ 	[ -d $(TOOLDIR)/include ] || mkdir $(TOOLDIR)/include
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/shared/expr.h ttools-2.0beta2.parachute/shared/expr.h
+--- ttools-2.0beta2.orig/shared/expr.h	1995-12-22 12:25:10.000000000 +0000
++++ ttools-2.0beta2.parachute/shared/expr.h	2005-10-06 18:43:25.000000000 +0100
+@@ -208,6 +208,6 @@
+ void expr_count_refs (expr e);
+ void *name_count_refs (struct name *np);
+ void expr_statistics (char *header);
+-#endif NO_LIBC
++#endif /* NO_LIBC */
+ 
+ #endif /* not EXPR_H */
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/shared/litin.c ttools-2.0beta2.parachute/shared/litin.c
+--- ttools-2.0beta2.orig/shared/litin.c	1995-12-22 12:25:10.000000000 +0000
++++ ttools-2.0beta2.parachute/shared/litin.c	2005-10-06 18:43:25.000000000 +0100
+@@ -6,7 +6,7 @@
+  */
+ 
+ #include "shared.h"
+-
++#include <errno.h>
+ 
+ /* File to input from. */
+ 
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/shared/litout.c ttools-2.0beta2.parachute/shared/litout.c
+--- ttools-2.0beta2.orig/shared/litout.c	1995-12-22 12:25:10.000000000 +0000
++++ ttools-2.0beta2.parachute/shared/litout.c	2005-10-06 18:43:25.000000000 +0100
+@@ -8,7 +8,7 @@
+ /* LIT format object file output routines */
+ 
+ #include "shared.h"
+-
++#include <errno.h>
+ 
+ /* File to output to.  Using global var instead of a parameter to every
+    function looks reasonable; you will hardly ever want to write many files
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/startups/linkboot/crt0.S ttools-2.0beta2.parachute/startups/linkboot/crt0.S
+--- ttools-2.0beta2.orig/startups/linkboot/crt0.S	1995-12-22 12:24:39.000000000 +0000
++++ ttools-2.0beta2.parachute/startups/linkboot/crt0.S	2005-11-08 08:17:38.000000000 +0000
+@@ -66,6 +66,8 @@
+ 
+ 
+ /* Offsets to boot parameters from Wreg, when it points to `workspace' */
++#define L_BOOT_MEMORY_MAGIC  ((_boot_memory_magic-workspace)/4)
++#define L_BOOT_MEMORY_END  ((_boot_memory_end-workspace)/4)
+ #define L_BOOT_LINK_OUT  ((_boot_link_out-workspace)/4)
+ #define L_BOOT_MEMORY_START  ((_boot_memory_start-workspace)/4)
+ #define L_BOOT_OLD_IPTR  ((_boot_old_iptr-workspace)/4)
+@@ -114,6 +116,8 @@
+ 
+ /* exported symbols */
+ .globl @@hook
++.globl _boot_memory_magic
++.globl _boot_memory_end
+ .globl _boot_link_out
+ .globl _boot_memory_start
+ .globl _boot_old_iptr
+@@ -175,13 +179,22 @@
+ 	   call above */
+         ldl L_BOOT_MEMORY_START
+         adc -(1b-@@hook)
++        stl L_BOOT_MEMORY_START
++
++	/* Initialise the end memory pointer - it should get updated later */
+         ldl L_BOOT_MEMORY_START
++	/*marker*/
++        stl L_BOOT_MEMORY_END
+ 
+         /* Compute output channel address */
+         ldl L_BOOT_LINK_IN
+         ldnlp -4
+         stl L_BOOT_LINK_OUT
+ 
++	/* Just for debugging, so we can find our workspace... */
++	ldc 0x12345678
++	stl L_BOOT_MEMORY_MAGIC
++
+ 	/*
+ 	 * vital initializations
+ 	 */
+@@ -268,7 +281,7 @@
+ 	.word ?[5]
+ 
+ 	/* Wreg is set up to point here during phase 1; just above
+-           Wred is PHASE1_WORKSPACE_SZ words for use as local
++           Wreg is PHASE1_WORKSPACE_SZ words for use as local
+            variables */
+ workspace:
+ 	.word ?[PHASE1_WORKSPACE_SZ]
+@@ -276,10 +289,14 @@
+ 	/* Saved boot parameters visible to C code.  As these are at
+            known offsets from Wreg, first phase code can access them
+            as local vars using defined L_* offsets */
++_boot_memory_magic::
++	.word 0xCAFEB00B
++_boot_memory_end::
++	.word 0xDEADC0DE
+ _boot_link_out::
+ 	.word ?
+ _boot_memory_start::
+-	.word ?
++	.word 0xDEADBEEF
+ _boot_old_iptr::
+ 	.word ?
+ _boot_old_wreg::
+@@ -317,8 +334,8 @@
+ 
+ 	/* Set up segment address table (ntab) which is necessary for
+ 	   lit_load_segment.  It will have entries for .head, .head2,
+-	   and .text; all others should have been eliminated in link
+-	   lime.  Actually, refs to head2@@start should have been
++	   and .text; all others should have been eliminated at link
++	   time.  Actually, refs to head2@@start should have been
+ 	   eliminated as well, we put head2 into the table just so. */
+ 	LDPI (head@@start)	
+ 	stl L_NTAB
+@@ -363,6 +380,11 @@
+ 	add
+ 	stl L_AREA
+ 
++	/* Record last value of L_AREA for client code */
++	ldl L_AREA
++	/*marker*/
++	STS(_boot_memory_end);
++
+ 	/* go load next segment */
+ 	j 1b
+ 
+diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/startups/linkboot/Makefile ttools-2.0beta2.parachute/startups/linkboot/Makefile
+--- ttools-2.0beta2.orig/startups/linkboot/Makefile	1996-01-16 11:17:43.000000000 +0000
++++ ttools-2.0beta2.parachute/startups/linkboot/Makefile	2005-10-06 18:43:25.000000000 +0100
+@@ -97,5 +97,5 @@
+ distclean: clean
+ 	rm -f crt0.a
+ realclean: distclean
+-	rm litload.s
++	rm -f litload.s
+ force:

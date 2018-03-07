@@ -1,0 +1,4 @@
+Changes to ttools for Parachute are made in the ttools-2.0beta2.parachute
+directory, and a patch between this and the ttools-2.0beta2.orig tree is
+created by the make-ttools-patch.sh script. This patch is picked up by the main
+build.
