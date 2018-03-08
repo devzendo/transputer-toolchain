@@ -761,7 +761,7 @@ enum reg_class
 /* See the comment for STACK_POINTER_OFFSET above */
 /* #define STACK_DYNAMIC_OFFSET(FUNDECL) */
 
-#define DYNAMIC_CHAIN_ADDRESS(FRAMEADDR)  ((void *)abort ())
+#define DYNAMIC_CHAIN_ADDRESS(FRAMEADDR) 0; ((void)abort ())
 /*-#define SETUP_FRAME_ADDRESSES () */
 /*-#define RETURN_ADDR_RTX (count, frameaddr) */
 /*-#define RETURN_ADDR_IN_PREVIOUS_FRAME */

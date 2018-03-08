@@ -999,7 +999,7 @@ for machine in $canon_build $canon_host $canon_target; do
 		broken_install=yes
 		gnu_ld=yes
 		;;
-	i[345]86-*-linux*)		# Intel 80386's running Linux
+	i[3456]86-*-linux*)		# Intel 80386's running Linux
 		cpu_type=i386		# with ELF format
 		xm_file=i386/xm-linux.h
 		xmake_file=x-linux
