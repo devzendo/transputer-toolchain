@@ -1,14 +1,12 @@
 README.txt
 ----------
 
-This is the source code distribution of various build tools for the Parachute
-parallel programming environment. These tools were not developed by me; this is
-just a collection found on the Internet, and modified to build on current
-development systems by me.
+This is the source code distribution of various build tools for the Parachute parallel programming environment.
+These tools were not originally developed by me; this is just a collection found on the Internet, and modified to build
+on current development systems by me.
 
-Copyrights of the individual tools are given in the various subdirectories,
-alongside the tool distribution archives. My patches and build scripts however
-are...
+Copyrights of the individual tools are given in the various subdirectories, alongside the tool distribution archives.
+My patches, build scripts and later modifications however are...
 
 (C) 2005-2018 Matt J. Gumbley
 matt.gumbley@gmail.com
@@ -18,8 +16,11 @@ http://devzendo.github.io/dev/parachute
 LICENSING
 ---------
 This software is distributed under a variety of licenses - see subdirectories.
+
 All software here obtained from http://wotug.org/parallel/transputer/software/compilers/gcc/pereslavl/
 University of Pereslavl, Russia.
+
+Many thanks to the authors listed below for their work in adding Transputer support to the GCC toolchain.
 
 DIRECTORY STRUCTURE
 -------------------
@@ -31,7 +32,12 @@ gcc-t800: the GCC-T800 GCC 2.7.2 compiler.
   Author: Yury Shevchuk (sizif@botik.ru)
 
   I (Matt) have ungzipped the original gcc-2.7.2-t800.12.dif.gz into ...diff
-  The gcc-2.7.2-t800.parachute.patch adds support for i686 Linux, and OSX.
+  The gcc-2.7.2-t800.parachute.patch adds support for i686 Linux.
+
+  The gcc-2.7.2 directory in here is the unzipped original GCC 2.7.2 source release, with the t800 patch subsequently
+  applied, then the parachute patch applied. Commits were made at each of these stages so I can work with Mercurial for
+  understanding differences, rather than diffs. Subsequent commits in this directory are to enable the toolchain to
+  build on more recent OSs.
 
 ttools: TTOOLS 2.0beta2: Transputer tools - assembler, linker, loader and auxiliary programs.
   A free package comprising assembler, linker, loader(s), and auxiliary programs intended for software development for
