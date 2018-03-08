@@ -309,7 +309,7 @@ static tree empty_cleanup_list;
 
 /* Nonzero once virtual register instantiation has been done.
    assign_stack_local uses frame_pointer_rtx when this is nonzero.  */
-static int virtuals_instantiated;
+int virtuals_instantiated;
 
 /* These variables hold pointers to functions to
    save and restore machine-specific data,
@@ -439,7 +439,7 @@ static rtx fixup_stack_1	PROTO((rtx, rtx));
 static void optimize_bit_field	PROTO((rtx, rtx, rtx *));
 static void instantiate_decls	PROTO((tree, int));
 static void instantiate_decls_1	PROTO((tree, int));
-static void instantiate_decl	PROTO((rtx, int, int));
+void instantiate_decl	PROTO((rtx, int, int));
 static int instantiate_virtual_regs_1 PROTO((rtx *, rtx, int));
 static void delete_handlers	PROTO((void));
 static void pad_to_arg_alignment PROTO((struct args_size *, int));
@@ -2552,7 +2552,7 @@ instantiate_decls_1 (let, valid_only)
    If VALID_ONLY is non-zero, it means that the RTL should only be
    changed if the new address is valid.  */
 
-static void
+void
 instantiate_decl (x, size, valid_only)
      rtx x;
      int size;
@@ -3210,6 +3210,7 @@ assign_parms (fndecl, second_time)
 
      The second time through, simply use ap to avoid generating rtx.  */
 
+#ifndef SETUP_INCOMING_ARGS_RTX
   if ((ARG_POINTER_REGNUM == STACK_POINTER_REGNUM
        || ! (fixed_regs[ARG_POINTER_REGNUM]
 	     || ARG_POINTER_REGNUM == FRAME_POINTER_REGNUM))
@@ -3217,6 +3218,9 @@ assign_parms (fndecl, second_time)
     internal_arg_pointer = copy_to_reg (virtual_incoming_args_rtx);
   else
     internal_arg_pointer = virtual_incoming_args_rtx;
+#else
+  SETUP_INCOMING_ARGS_RTX (internal_arg_pointer, second_time);
+#endif
   current_function_internal_arg_pointer = internal_arg_pointer;
 
   stack_args_size.constant = 0;

@@ -1472,6 +1472,15 @@ expand_asm_operands (string, outputs, inputs, clobbers, vol, filename, line)
 	}
       else
 	{
+	  output_rtx[i] = NULL_RTX;
+	}
+
+      if (allows_reg && (output_rtx[i] == NULL_RTX
+#ifdef ASM_OPERAND_PREDICATE
+			 || ! ASM_OPERAND_PREDICATE (output_rtx[i], VOIDmode)
+#endif
+			 ))
+	{
 	  if (TYPE_MODE (type) == BLKmode)
 	    {
 	      output_rtx[i] = assign_stack_temp (BLKmode,
@@ -1555,6 +1564,16 @@ expand_asm_operands (string, outputs, inputs, clobbers, vol, filename, line)
 
       XVECEXP (body, 3, i)      /* argvec */
 	= expand_expr (TREE_VALUE (tail), NULL_RTX, VOIDmode, 0);
+
+#ifdef ASM_OPERAND_PREDICATE
+      if (! ASM_OPERAND_PREDICATE (XVECEXP (body, 3, i),
+				   TYPE_MODE (TREE_TYPE (TREE_VALUE (tail))))
+	  && allows_reg)
+	XVECEXP (body, 3, i)
+	      = force_reg (TYPE_MODE (TREE_TYPE (TREE_VALUE (tail))),
+			   XVECEXP (body, 3, i));
+#endif
+
       if (CONSTANT_P (XVECEXP (body, 3, i))
 	  && ! general_operand (XVECEXP (body, 3, i),
 				TYPE_MODE (TREE_TYPE (TREE_VALUE (tail)))))
@@ -1661,6 +1680,12 @@ expand_asm_operands (string, outputs, inputs, clobbers, vol, filename, line)
 					gen_rtx (SCRATCH, VOIDmode, 0)));
 		  continue;
 		}
+
+#ifdef ASM_SPECIAL_CLOBBER
+	      /* Handle machine-specific negative values that might
+		 result from ADDITIONAL_REGISTER_NAMES  */
+	      ASM_SPECIAL_CLOBBER(j);
+#endif
 
 	      /* Ignore unknown register, error already signalled.  */
 	      continue;
@@ -2706,7 +2731,7 @@ expand_return (retval)
       emit_barrier ();
       return;
     }
-#ifdef HAVE_return
+#if defined(HAVE_return) && BRANCH_COST < 2
   /* This optimization is safe if there are local cleanups
      because expand_null_return takes care of them.
      ??? I think it should also be safe when there is a cleanup label,
@@ -2743,7 +2768,7 @@ expand_return (retval)
 	    return;
 	  }
     }
-#endif /* HAVE_return */
+#endif /* defined(HAVE_return) && BRANCH_COST < 2 */
 
   /* If the result is an aggregate that is being returned in one (or more)
      registers, load the registers here.  The compiler currently can't handle
