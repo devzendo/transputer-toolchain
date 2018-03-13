@@ -175,7 +175,7 @@ extern char *getenv ();
 extern int errno;
 #endif
 
-extern int sys_nerr;
+/* conflicts with that in stdio.h on osx // extern int sys_nerr; */
 #ifndef HAVE_STRERROR
 #if defined(bsd4_4)
 extern const char *const sys_errlist[];

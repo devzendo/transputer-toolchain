@@ -123,6 +123,9 @@ case $os in
 	-windowsnt*)
 		os=`echo $os | sed -e 's/windowsnt/winnt/'`
 		;;
+	-darwin*)
+		os=-darwin
+		;;
 esac
 
 # Decode aliases for certain CPU-COMPANY combinations.
@@ -228,6 +231,9 @@ case $basic_machine in
 		;;
 	da30 | da30-*)
 		basic_machine=m68k-da30
+		;;
+	darwin)
+		basic_machine=darwin
 		;;
 	decstation | decstation-3100 | pmax | pmax-* | pmin | dec3100 | decstatn)
 		basic_machine=mips-dec
@@ -622,6 +628,9 @@ case $os in
 		;;
 	-solaris)
 		os=-solaris2
+		;;
+	-darwin)
+		os=-darwin
 		;;
 	-unixware* | svr4*)
 		os=-sysv4

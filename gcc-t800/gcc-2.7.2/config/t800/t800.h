@@ -61,7 +61,7 @@ Boston, MA 02111-1307, USA.  */
 
 #define CPP_PREDEFINES  "-Dtransputer"
 
-/* #define STDC_VALUE */
+#define STDC_VALUE
 
 extern int target_flags;
 
@@ -1813,7 +1813,7 @@ bss_section ()							\
 /* #define REAL_VALUE_ISNAN(X) */
 /* #define REAL_ARITHMETIC(OUTPUT, CODE, X, Y) */
 /* #define REAL_VALUE_NEGATE(X) */
-/* #define REAL_VALUE_TRUNCATE (@var{mode}, @var{x})
+/* #define REAL_VALUE_TRUNCATE (@var{mode}, @var{x}) */
 /* #define REAL_VALUE_TO_INT(LOW, HIGH, X) */
 /* #define REAL_VALUE_FROM_INT(X, LOW, HIGH) */
 

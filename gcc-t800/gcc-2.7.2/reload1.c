@@ -1961,7 +1961,7 @@ reload (first, global, dumpfile)
         AND_HARD_REG_SET (temp, used_free_regs);
         GO_IF_HARD_REG_EQUAL (temp, reg_class_contents[NO_REGS], m1);
         something_changed = 1;
-      m1:
+      m1: /* empty statement to prevent 'label at end of compound statement' */  ;
       }
 #endif
     }

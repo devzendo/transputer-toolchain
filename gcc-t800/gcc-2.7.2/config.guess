@@ -42,13 +42,12 @@ if (test -f /.attbin/uname) >/dev/null 2>&1 ; then
 fi
 
 UNAME_MACHINE=`(uname -m) 2>/dev/null` || UNAME_MACHINE=unknown
-if [ "$UNAME_MACHINE" = "i686" ]; then
-	UNAME_MACHINE="i586"
+if [ "$UNAME_MACHINE" = "i686" -o "$UNAME_MACHINE" = "x86_64" ]; then
+	UNAME_MACHINE="i586" # A lie, but it'll suffice.
 fi
 UNAME_RELEASE=`(uname -r) 2>/dev/null` || UNAME_RELEASE=unknown
 UNAME_SYSTEM=`(uname -s) 2>/dev/null` || UNAME_SYSTEM=unknown
 UNAME_VERSION=`(uname -v) 2>/dev/null` || UNAME_VERSION=unknown
-
 trap 'rm -f dummy.c dummy.o dummy; exit 1' 1 2 15
 
 # Note: order is significant - the case branches are not exclusive.
@@ -314,6 +313,9 @@ EOF
 	exit 0 ;;
     *:NetBSD:*:*)
 	echo ${UNAME_MACHINE}-unknown-netbsd`echo ${UNAME_RELEASE}|sed -e 's/[-_].*/\./'`
+	exit 0 ;;
+    *:Darwin:*:*)
+	echo ${UNAME_MACHINE}-unknown-darwin
 	exit 0 ;;
     *:GNU:*:*)
 	echo `echo ${UNAME_MACHINE}|sed -e 's,/.*$,,'`-unknown-gnu`echo ${UNAME_RELEASE}|sed -e 's,/.*$,,'`
