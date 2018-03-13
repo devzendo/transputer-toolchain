@@ -99,7 +99,7 @@ diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/Makefile ttools-2.
  # there under native names (ast, lit, ...) for command-line usage.
  
 -BINDIR=/usr/local/bin
-+BINDIR=/usr/local/t800/bin
++BINDIR=/opt/parachute/bin
  #BINDIR=/usr/bin
  
  # Cross-tools directory with subdirs: bin, lib, include, ...
@@ -113,7 +113,7 @@ diff -bruNX ttools-2.0beta2.diff-exclude ttools-2.0beta2.orig/Makefile ttools-2.
  # Where to put manpages
  
 -MANDIR=/usr/local/man
-+MANDIR=/usr/local/t800/man
++MANDIR=/opt/parachute/man
  #MANDIR=/usr/man
  
  # Where is ar on your system?  We'll use it for target libraries.
