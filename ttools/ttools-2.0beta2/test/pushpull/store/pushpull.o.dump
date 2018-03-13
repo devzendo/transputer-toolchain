@@ -1,0 +1,137 @@
+000000: NAME:0 is "#0", fragment defined here
+000004: NAME:1 is head@@start, defined here
+000019: NAME:2 is @@hook, fragment defined here
+000029: MARKER: end of area typecode 0 (NAMETABLE), area length 29
+000033: DUMMY
+000034: DUMMY
+000035: DUMMY
+000036: DUMMY
+000037: MARKER: end of area typecode 1 (NEEDS), area length 0
+000041: DUMMY
+000042: DUMMY
+000043: DUMMY
+000044: DUMMY
+000045: FRAGMENT @@hook, align 1
+000049: element #0 BLOCK(1)
+	40 
+000051: element #1 CMD 0x40
+	arg (-2147446819 - (@@hook + [1]))
+	size [1..8]
+000071: element #2 BLOCK(4)
+	21 fb e0 40 
+000076: element #3 CMD 0x40
+	arg (-2147446819 - (@@hook + (SUM: [1] [3])))
+	size [1..8]
+000099: element #4 BLOCK(4)
+	21 fb e0 40 
+000104: element #5 CMD 0x40
+	arg (-2147446819 - (@@hook + (SUM: 3 members)))
+	size [1..8]
+000128: element #6 BLOCK(4)
+	21 fb e0 40 
+000133: element #7 CMD 0x40
+	arg (-2147446819 - (@@hook + (SUM: 4 members)))
+	size [1..8]
+000158: element #8 BLOCK(5)
+	21 fb e0 24 f2 
+000164: element #9 CMD 0x40
+	arg (-2147483540 - (@@hook + (SUM: 5 members)))
+	size [1..8]
+000190: element #10 BLOCK(3)
+	21 fb e0 
+000194: element #11 BLOCK(1)
+	47 
+000196: element #12 BLOCK(3)
+	25 10 fd 
+000200: element #13 CMD 0x40
+	arg ((SUM: 5 members) + 64)
+	size 2
+000218: element #14 BLOCK(5)
+	2a 10 fd 21 f5 
+000224: element #15 CMD 0x40
+	arg (-2147446850 - (@@hook + (SUM: 6 members)))
+	size [1..8]
+000251: element #16 BLOCK(2)
+	21 fb 
+000254: element #17 CMD 0x40
+	arg (-2147479588 - (@@hook + (SUM: 7 members)))
+	size [1..8]
+000282: element #18 BLOCK(2)
+	21 fb 
+000285: element #19 CMD 0x90
+	arg ((SUM: [20] [22]) + 7)
+	size [1..2]
+000301: element #20 CMD 0x40
+	arg (-2147446850 - (@@hook + (SUM: 9 members)))
+	size [1..8]
+000331: element #21 BLOCK(2)
+	21 fb 
+000334: element #22 CMD 0x40
+	arg (-2147475496 - (@@hook + (SUM: 10 members)))
+	size [1..8]
+000365: element #23 BLOCK(2)
+	21 fb 
+000368: element #24 BLOCK(1)
+	92 
+000370: element #25 CMD 0x00
+	arg (-11 - (SUM: 5 members))
+	size 2
+000389: element #26 BLOCK(24)
+	60 be 22 f2 22 fb 74 30-d1 71 60 a6 22 f2 81 22 
+	fb 71 74 30 d1 71 f4 c0-
+000414: element #27 BLOCK(2)
+	60 a2 
+000417: element #28 BLOCK(25)
+	11 24 f2 22 50 44 fb 71-60 cf c0 a7 73 24 f2 22 
+	50 71 fb 40 74 e0 b2 22-f0 
+000443: element #29 CMD 0x40
+	arg (-2147446904 - (@@hook + (SUM: 11 members)))
+	size [1..8]
+000475: element #30 BLOCK(2)
+	21 fb 
+000478: element #31 CMD 0x40
+	arg (-2147471458 - (@@hook + (SUM: 12 members)))
+	size [1..8]
+000511: element #32 BLOCK(2)
+	21 fb 
+000514: element #33 CMD 0x90
+	arg ((SUM: [34] [36]) + 7)
+	size [1..2]
+000530: element #34 CMD 0x40
+	arg (-2147446904 - (@@hook + (SUM: 14 members)))
+	size [1..8]
+000565: element #35 BLOCK(2)
+	21 fb 
+000568: element #36 CMD 0x40
+	arg (-2147467366 - (@@hook + (SUM: 15 members)))
+	size [1..8]
+000604: element #37 BLOCK(2)
+	21 fb 
+000607: element #38 BLOCK(1)
+	92 
+000609: element #39 CMD 0x00
+	arg (-11 - (SUM: 5 members))
+	size 2
+000628: element #40 BLOCK(4)
+	60 be 74 30 
+000633: element #41 BLOCK(1)
+	a6 
+000635: element #42 BLOCK(4)
+	22 f2 22 fb 
+000640: element #43 BLOCK(2)
+	60 07 
+000643: element #44 BLOCK(11)
+	11 24 f2 22 50 44 f7 71-60 cf c0 
+000655: element #45 BLOCK(1)
+	a7 
+000657: element #46 BLOCK(13)
+	73 24 f2 22 50 71 f7 71-74 e0 b2 22 f0 
+000671: MARKER: end of area typecode 2 (SEGMENTS), area length 626
+000677: DUMMY
+000678: DUMMY
+000679: NAMEDEF head@@start has value -2147450880
+000689: MARKER: end of area typecode 3 (DEFINITIONS), area length 10
+000693: DUMMY
+000694: DUMMY
+000695: DUMMY
+000696: DUMMY

@@ -1,0 +1,106 @@
+000000: element #0 BLOCK(44)
+	name:0:
+	                  24 f2 mint 
+	(name:0 + 2):
+	               24 20 50 ldnlp 1024
+	(name:0 + 5):
+	                  23 fc gajw 
+	(name:0 + 7):
+	                  60 be ajw -2
+	(name:0 + 9):
+	                  24 f2 mint 
+	(name:0 + 11):
+	                  21 f8 sthf 
+	(name:0 + 13):
+	                  24 f2 mint 
+	(name:0 + 15):
+	                  21 fc stlf 
+	(name:0 + 17):
+	                     4b ldc 11
+	(name:0 + 18):
+	                     d1 stl 1
+	(name:0 + 19):
+	                  24 f2 mint 
+	(name:0 + 21):
+	                     71 ldl 1
+	(name:0 + 22):
+	                  24 f2 mint 
+	(name:0 + 24):
+	                     fa wsub 
+	(name:0 + 25):
+	                  60 ef stnl -1
+	(name:0 + 27):
+	                     10 ldlp 0
+	(name:0 + 28):
+	                     4c ldc 12
+	(name:0 + 29):
+	                  22 f1 lend 
+	(name:0 + 31):
+	                  22 f9 testerr 
+	(name:0 + 33):
+	                  25 f7 clrhalterr 
+	(name:0 + 35):
+	                     40 ldc 0
+	(name:0 + 36):
+	                  25 f4 sttimer 
+	(name:0 + 38):
+	                     95 call (name:0 + 44)
+	(name:0 + 39):
+	                  21 f5 stopp 
+	(name:0 + 41):
+	                     00 j (name:0 + 42)
+	(name:0 + 42):
+	                     00 j (name:0 + 43)
+	(name:0 + 43):
+	                     00 j (name:0 + 44)
+000045: SEGMENT "text", default fragment name:1
+000053: element #1 BLOCK(588)
+	61 be 22 23 95 21 2c 99-d2 21 2c 95 d3 21 2c 91 
+	d4 21 2b 9d d5 21 2c 9e-48 2a fb 16 28 f8 21 2c 
+	95 48 2a fb 17 28 f8 21-2b 9c 18 28 f4 21 2b 96 
+	1a 28 f4 73 72 f8 21 29-94 72 73 22 fc 21 28 9d 
+	72 73 21 ff 21 28 96 40-74 75 21 fa 21 27 9e 40 
+	74 75 21 fa f0 21 27 95-72 21 fd 73 23 f5 21 26 
+	9c 72 73 24 f1 21 26 95-74 75 24 f0 21 25 9e 74 
+	75 24 f1 21 25 97 18 28-fa 1a 28 fa 28 f7 10 28 
+	f4 71 70 21 24 99 18 28-fa 1a 28 fa 28 f9 10 28 
+	f4 71 70 21 23 99 18 28-fa 1a 28 fa 28 fb 10 28 
+	f4 71 70 21 22 99 18 28-fa 1a 28 fa 28 fc 10 28 
+	f4 71 70 21 21 99 2a f0-18 28 fa 28 f9 10 28 f4 
+	71 70 21 20 9a 16 28 fe-17 28 fe 28 f7 47 2a fb 
+	10 28 f4 71 70 2f 98 16-28 fe 17 28 fe 28 f9 47 
+	2a fb 10 28 f4 71 70 2e-96 16 28 fe 17 28 fe 28 
+	fb 47 2a fb 10 28 f4 71-70 2d 94 16 28 fe 17 28 
+	fe 28 fc 47 2a fb 10 28-f4 71 70 2c 92 29 ff 16 
+	28 fe 28 f9 47 2a fb 10-28 f4 71 70 2b 91 18 28 
+	fa 46 2a fb 2a f1 10 29-fe 70 2a 91 16 28 fe 46 
+	2a fb 2a f1 10 29 fe 70-29 93 72 d0 10 29 f8 10 
+	28 f4 71 70 28 99 72 d0-10 29 f6 47 2a fb 10 28 
+	f4 71 70 27 9a 18 28 fa-48 2a fb 47 2a fb 10 28 
+	f4 71 70 26 9a 18 28 fa-1a 28 fa 29 f5 dc 7c 25 
+	9c 1a 28 fa 18 28 fa 29-f4 dd 7d 25 90 18 28 fa 
+	1a 28 fa 29 f4 de 7e 24-94 7c c0 24 90 7e c0 23 
+	9c 7d c0 23 98 16 28 fe-17 28 fe 29 f5 df 7f 22 
+	9c 17 28 fe 16 28 fe 29-f4 21 d0 21 70 21 9e 16 
+	28 fe 17 28 fe 29 f4 21-d1 21 71 21 90 7f c0 9d 
+	21 71 c0 99 21 70 c0 95-40 21 b2 22 f0 22 f0 22 
+	f0 2a 4b 21 fb 30 25 fa-81 2a 43 21 fb e0 26 4a 
+	21 fb fa 30 22 f0 29 4a-21 fb 30 25 fa 81 29 42 
+	21 fb e0 26 45 21 fb 28-f2 22 f0 60 bd 28 47 21 
+	fb 30 d0 70 60 cf 21 a4-40 d0 27 4e 21 fb d2 72 
+	30 c0 a1 08 72 51 d2 70-81 d0 60 03 70 d1 71 c0 
+	a3 b3 22 f0 71 25 4f 21-fb fa 30 60 bf 42 21 fb 
+	d0 f6 60 bd 71 60 8f d1-61 04 23 4e 21 fb 30 c0 
+	a8 41 23 46 21 fb e0 64-92 22 f0 00 
+000644: SEGMENT "data", default fragment name:2
+000652: element #2 BLOCK(52)
+	14 00 00 00 45 00 00 00-04 00 00 00 0c 00 00 00 
+	66 66 66 66 66 66 34 40-3d 0a d7 a3 70 7d 51 40 
+	9a 99 99 99 99 99 11 40-58 39 b4 c8 76 46 69 40 
+	00 00 00 00 
+000705: SEGMENT "bss", default fragment name:3
+000712: element #3 BLOCK(16)
+	00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 
+000729: MARKER: end of area typecode 2 (SEGMENTS), area length 729
+000735: DUMMY
+000736: DUMMY

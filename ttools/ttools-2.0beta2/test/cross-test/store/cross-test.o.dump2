@@ -1,0 +1,320 @@
+000000: NAME:0 is "#0", fragment defined here
+000004: NAME:1 is ___main, defined elsewhere
+000015: NAME:2 is _foo, fragment defined here
+000023: NAME:3 is _dfoo, fragment defined here
+000032: NAME:4 is _discard, fragment defined here
+000044: NAME:5 is _ddiscard, fragment defined here
+000057: NAME:6 is "#6", fragment defined here
+000061: NAME:7 is _main, fragment defined here
+000070: NAME:8 is "#8", fragment defined here
+000074: NAME:9 is "#9", fragment defined here
+000078: NAME:10 is "#10", fragment defined here
+000082: MARKER: end of area typecode 0 (NAMETABLE), area length 82
+000086: DUMMY
+000087: DUMMY
+000088: DUMMY
+000089: DUMMY
+000090: NEED: _dfoo needs "#10" "#8"
+000097: NEED: _main needs ___main _foo _dfoo _discard _ddiscard
+000107: NEED: _foo needs "#10" "#8"
+000114: MARKER: end of area typecode 1 (NEEDS), area length 24
+000118: DUMMY
+000119: DUMMY
+000120: DUMMY
+000121: DUMMY
+000122: SEGMENT "text", default fragment "#6"
+000130: element #0 DATA/1
+	value 32
+	count ((4 - "#6") & 3)
+	size [0..3]
+000149: element #1 BLOCK(12)
+	00 00 00 00 00 00 00 00-00 00 00 00 
+000162: FRAGMENT _main, align 1
+000166: element #2 BLOCK(2)
+	61 be 
+000169: element #3 CMD 0x90
+	arg (___main - ((_main + [3]) + 2))
+	size [1..8]
+000188: element #4 CMD 0x90
+	arg (_foo - ((_main + (SUM: [3] [4])) + 2))
+	size [1..8]
+000210: element #5 BLOCK(1)
+	d2 
+000212: element #6 CMD 0x90
+	arg (_foo - ((_main + (SUM: 3 members)) + 3))
+	size [1..8]
+000235: element #7 BLOCK(1)
+	d3 
+000237: element #8 CMD 0x90
+	arg (_foo - ((_main + (SUM: 4 members)) + 4))
+	size [1..8]
+000261: element #9 BLOCK(1)
+	d4 
+000263: element #10 CMD 0x90
+	arg (_foo - ((_main + (SUM: 5 members)) + 5))
+	size [1..8]
+000288: element #11 BLOCK(1)
+	d5 
+000290: element #12 CMD 0x90
+	arg (_dfoo - ((_main + (SUM: 6 members)) + 6))
+	size [1..8]
+000316: element #13 BLOCK(6)
+	48 2a fb 16 28 f8 
+000323: element #14 CMD 0x90
+	arg (_dfoo - ((_main + (SUM: 7 members)) + 12))
+	size [1..8]
+000350: element #15 BLOCK(6)
+	48 2a fb 17 28 f8 
+000357: element #16 CMD 0x90
+	arg (_dfoo - ((_main + (SUM: 8 members)) + 18))
+	size [1..8]
+000385: element #17 BLOCK(3)
+	18 28 f4 
+000389: element #18 CMD 0x90
+	arg (_dfoo - ((_main + (SUM: 9 members)) + 21))
+	size [1..8]
+000418: element #19 BLOCK(6)
+	1a 28 f4 73 72 f8 
+000425: element #20 CMD 0x90
+	arg (_discard - ((_main + (SUM: 10 members)) + 27))
+	size [1..8]
+000455: element #21 BLOCK(4)
+	72 73 22 fc 
+000460: element #22 CMD 0x90
+	arg (_discard - ((_main + (SUM: 11 members)) + 31))
+	size [1..8]
+000491: element #23 BLOCK(4)
+	72 73 21 ff 
+000496: element #24 CMD 0x90
+	arg (_discard - ((_main + (SUM: 12 members)) + 35))
+	size [1..8]
+000528: element #25 BLOCK(5)
+	40 74 75 21 fa 
+000534: element #26 CMD 0x90
+	arg (_discard - ((_main + (SUM: 13 members)) + 40))
+	size [1..8]
+000567: element #27 BLOCK(6)
+	40 74 75 21 fa f0 
+000574: element #28 CMD 0x90
+	arg (_discard - ((_main + (SUM: 14 members)) + 46))
+	size [1..8]
+000608: element #29 BLOCK(6)
+	72 21 fd 73 23 f5 
+000615: element #30 CMD 0x90
+	arg (_discard - ((_main + (SUM: 15 members)) + 52))
+	size [1..8]
+000650: element #31 BLOCK(4)
+	72 73 24 f1 
+000655: element #32 CMD 0x90
+	arg (_discard - ((_main + (SUM: 16 members)) + 56))
+	size [1..8]
+000691: element #33 BLOCK(4)
+	74 75 24 f0 
+000696: element #34 CMD 0x90
+	arg (_discard - ((_main + (SUM: 17 members)) + 60))
+	size [1..8]
+000733: element #35 BLOCK(4)
+	74 75 24 f1 
+000738: element #36 CMD 0x90
+	arg (_discard - ((_main + (SUM: 18 members)) + 64))
+	size [1..8]
+000776: element #37 BLOCK(13)
+	18 28 fa 1a 28 fa 28 f7-10 28 f4 71 70 
+000790: element #38 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 19 members)) + 77))
+	size [1..8]
+000829: element #39 BLOCK(13)
+	18 28 fa 1a 28 fa 28 f9-10 28 f4 71 70 
+000843: element #40 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 20 members)) + 90))
+	size [1..8]
+000883: element #41 BLOCK(13)
+	18 28 fa 1a 28 fa 28 fb-10 28 f4 71 70 
+000897: element #42 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 21 members)) + 103))
+	size [1..8]
+000938: element #43 BLOCK(13)
+	18 28 fa 1a 28 fa 28 fc-10 28 f4 71 70 
+000952: element #44 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 22 members)) + 116))
+	size [1..8]
+000994: element #45 BLOCK(12)
+	2a f0 18 28 fa 28 f9 10-28 f4 71 70 
+001007: element #46 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 23 members)) + 128))
+	size [1..8]
+001050: element #47 BLOCK(16)
+	16 28 fe 17 28 fe 28 f7-47 2a fb 10 28 f4 71 70 
+001067: element #48 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 24 members)) + 144))
+	size [1..8]
+001111: element #49 BLOCK(16)
+	16 28 fe 17 28 fe 28 f9-47 2a fb 10 28 f4 71 70 
+001128: element #50 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 25 members)) + 160))
+	size [1..8]
+001173: element #51 BLOCK(16)
+	16 28 fe 17 28 fe 28 fb-47 2a fb 10 28 f4 71 70 
+001190: element #52 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 26 members)) + 176))
+	size [1..8]
+001236: element #53 BLOCK(16)
+	16 28 fe 17 28 fe 28 fc-47 2a fb 10 28 f4 71 70 
+001253: element #54 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 27 members)) + 192))
+	size [1..8]
+001300: element #55 BLOCK(15)
+	29 ff 16 28 fe 28 f9 47-2a fb 10 28 f4 71 70 
+001316: element #56 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 28 members)) + 207))
+	size [1..8]
+001364: element #57 BLOCK(12)
+	18 28 fa 46 2a fb 2a f1-10 29 fe 70 
+001377: element #58 CMD 0x90
+	arg (_discard - ((_main + (SUM: 29 members)) + 219))
+	size [1..8]
+001426: element #59 BLOCK(12)
+	16 28 fe 46 2a fb 2a f1-10 29 fe 70 
+001439: element #60 CMD 0x90
+	arg (_discard - ((_main + (SUM: 30 members)) + 231))
+	size [1..8]
+001489: element #61 BLOCK(10)
+	72 d0 10 29 f8 10 28 f4-71 70 
+001500: element #62 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 31 members)) + 241))
+	size [1..8]
+001551: element #63 BLOCK(13)
+	72 d0 10 29 f6 47 2a fb-10 28 f4 71 70 
+001565: element #64 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 32 members)) + 254))
+	size [1..8]
+001618: element #65 BLOCK(14)
+	18 28 fa 48 2a fb 47 2a-fb 10 28 f4 71 70 
+001633: element #66 CMD 0x90
+	arg (_ddiscard - ((_main + (SUM: 33 members)) + 268))
+	size [1..8]
+001688: element #67 BLOCK(10)
+	18 28 fa 1a 28 fa 29 f5-dc 7c 
+001699: element #68 CMD 0x90
+	arg (_discard - ((_main + (SUM: 34 members)) + 278))
+	size [1..8]
+001755: element #69 BLOCK(10)
+	1a 28 fa 18 28 fa 29 f4-dd 7d 
+001766: element #70 CMD 0x90
+	arg (_discard - ((_main + (SUM: 35 members)) + 288))
+	size [1..8]
+001823: element #71 BLOCK(10)
+	18 28 fa 1a 28 fa 29 f4-de 7e 
+001834: element #72 CMD 0x90
+	arg (_discard - ((_main + (SUM: 36 members)) + 298))
+	size [1..8]
+001892: element #73 BLOCK(2)
+	7c c0 
+001895: element #74 CMD 0x90
+	arg (_discard - ((_main + (SUM: 37 members)) + 300))
+	size [1..8]
+001954: element #75 BLOCK(2)
+	7e c0 
+001957: element #76 CMD 0x90
+	arg (_discard - ((_main + (SUM: 38 members)) + 302))
+	size [1..8]
+002017: element #77 BLOCK(2)
+	7d c0 
+002020: element #78 CMD 0x90
+	arg (_discard - ((_main + (SUM: 39 members)) + 304))
+	size [1..8]
+002081: element #79 BLOCK(10)
+	16 28 fe 17 28 fe 29 f5-df 7f 
+002092: element #80 CMD 0x90
+	arg (_discard - ((_main + (SUM: 40 members)) + 314))
+	size [1..8]
+002154: element #81 BLOCK(12)
+	17 28 fe 16 28 fe 29 f4-21 d0 21 70 
+002167: element #82 CMD 0x90
+	arg (_discard - ((_main + (SUM: 41 members)) + 326))
+	size [1..8]
+002230: element #83 BLOCK(12)
+	16 28 fe 17 28 fe 29 f4-21 d1 21 71 
+002243: element #84 CMD 0x90
+	arg (_discard - ((_main + (SUM: 42 members)) + 338))
+	size [1..8]
+002307: element #85 BLOCK(2)
+	7f c0 
+002310: element #86 CMD 0x90
+	arg (_discard - ((_main + (SUM: 43 members)) + 340))
+	size [1..8]
+002375: element #87 BLOCK(3)
+	21 71 c0 
+002379: element #88 CMD 0x90
+	arg (_discard - ((_main + (SUM: 44 members)) + 343))
+	size [1..8]
+002445: element #89 BLOCK(3)
+	21 70 c0 
+002449: element #90 CMD 0x90
+	arg (_discard - ((_main + (SUM: 45 members)) + 346))
+	size [1..8]
+002516: element #91 BLOCK(5)
+	40 21 b2 22 f0 
+002522: FRAGMENT _discard, align 1
+002526: element #92 BLOCK(2)
+	22 f0 
+002529: FRAGMENT _ddiscard, align 1
+002533: element #93 BLOCK(2)
+	22 f0 
+002536: FRAGMENT _foo, align 1
+002540: element #94 CMD 0x40
+	arg ("#10" - ((_foo + [94]) + 2))
+	size [1..8]
+002559: element #95 BLOCK(6)
+	21 fb 30 25 fa 81 
+002566: element #96 CMD 0x40
+	arg ("#10" - ((_foo + (SUM: [94] [96])) + 8))
+	size [1..8]
+002588: element #97 BLOCK(3)
+	21 fb e0 
+002592: element #98 CMD 0x40
+	arg (("#8" + [106]) - ((_foo + (SUM: 3 members)) + 11))
+	size [1..8]
+002618: element #99 BLOCK(6)
+	21 fb fa 30 22 f0 
+002625: FRAGMENT _dfoo, align 1
+002629: element #100 CMD 0x40
+	arg ((("#10" + [108]) + 2) - (_dfoo + [100]))
+	size [1..8]
+002651: element #101 BLOCK(6)
+	21 fb 30 25 fa 81 
+002658: element #102 CMD 0x40
+	arg ((("#10" + [108]) + -4) - (_dfoo + (SUM: [100] [102])))
+	size [1..8]
+002684: element #103 BLOCK(3)
+	21 fb e0 
+002688: element #104 CMD 0x40
+	arg ((("#8" + [106]) + 5) - (_dfoo + (SUM: 3 members)))
+	size [1..8]
+002714: element #105 BLOCK(6)
+	21 fb 28 f2 22 f0 
+002721: SEGMENT "data", default fragment "#8"
+002729: element #106 DATA/1
+	value 0
+	count ((4 - "#8") & 3)
+	size [0..3]
+002748: element #107 BLOCK(48)
+	14 00 00 00 45 00 00 00-04 00 00 00 0c 00 00 00 
+	66 66 66 66 66 66 34 40-3d 0a d7 a3 70 7d 51 40 
+	9a 99 99 99 99 99 11 40-58 39 b4 c8 76 46 69 40 
+002797: SEGMENT "bss", default fragment "#9"
+002804: FRAGMENT "#10", align 1
+002808: element #108 DATA/1
+	value 0
+	count ((4 - "#10") & 3)
+	size [0..3]
+002827: element #109 BLOCK(8)
+	00 00 00 00 00 00 00 00-
+002836: MARKER: end of area typecode 2 (SEGMENTS), area length 2714
+002842: DUMMY
+002843: DUMMY
+002844: MARKER: end of area typecode 3 (DEFINITIONS), area length 0
+002848: DUMMY
+002849: DUMMY
+002850: DUMMY
+002851: DUMMY

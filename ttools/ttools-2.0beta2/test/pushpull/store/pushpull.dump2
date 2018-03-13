@@ -1,0 +1,234 @@
+000000: element #0 BLOCK(188)
+	name:0:
+	                     40 ldc 0
+	(name:0 + 1):
+	               2f 2d 4a ldc 4058
+	(name:0 + 4):
+	                  21 fb ldpi 
+	(name:0 + 6):
+	                     e0 stnl 0
+	(name:0 + 7):
+	                     40 ldc 0
+	(name:0 + 8):
+	               2f 2d 47 ldc 4055
+	(name:0 + 11):
+	                  21 fb ldpi 
+	(name:0 + 13):
+	                     e0 stnl 0
+	(name:0 + 14):
+	                     40 ldc 0
+	(name:0 + 15):
+	               2f 2d 44 ldc 4052
+	(name:0 + 18):
+	                  21 fb ldpi 
+	(name:0 + 20):
+	                     e0 stnl 0
+	(name:0 + 21):
+	                     40 ldc 0
+	(name:0 + 22):
+	               2f 2d 41 ldc 4049
+	(name:0 + 25):
+	                  21 fb ldpi 
+	(name:0 + 27):
+	                     e0 stnl 0
+	(name:0 + 28):
+	                  24 f2 mint 
+	(name:0 + 30):
+	            67 20 25 4c ldc -32676
+	(name:0 + 34):
+	                  21 fb ldpi 
+	(name:0 + 36):
+	                     e0 stnl 0
+	(name:0 + 37):
+	                     47 ldc 7
+	(name:0 + 38):
+	                  25 10 ldlp 80
+	(name:0 + 40):
+	                     fd startp 
+	(name:0 + 41):
+	                  24 4f ldc 79
+	(name:0 + 43):
+	                  2a 10 ldlp 160
+	(name:0 + 45):
+	                     fd startp 
+	(name:0 + 46):
+	                  21 f5 stopp 
+	(name:0 + 48):
+	               2f 2a 4b ldc 4011
+	(name:0 + 51):
+	                  21 fb ldpi 
+	(name:0 + 53):
+	            67 2f 2c 45 ldc -28731
+	(name:0 + 57):
+	                  21 fb ldpi 
+	(name:0 + 59):
+	                     9e call (name:0 + 74)
+	(name:0 + 60):
+	               2f 2a 43 ldc 4003
+	(name:0 + 63):
+	                  21 fb ldpi 
+	(name:0 + 65):
+	            66 2f 2b 49 ldc -24647
+	(name:0 + 69):
+	                  21 fb ldpi 
+	(name:0 + 71):
+	                     92 call (name:0 + 74)
+	(name:0 + 72):
+	                  61 06 j (name:0 + 48)
+	(name:0 + 74):
+	                  60 be ajw -2
+	(name:0 + 76):
+	                  22 f2 ldtimer 
+	(name:0 + 78):
+	                  22 fb tin 
+	(name:0 + 80):
+	                     74 ldl 4
+	(name:0 + 81):
+	                     30 ldnl 0
+	(name:0 + 82):
+	                     d1 stl 1
+	(name:0 + 83):
+	                     71 ldl 1
+	(name:0 + 84):
+	                  60 a6 cj (name:0 + 76)
+	(name:0 + 86):
+	                  22 f2 ldtimer 
+	(name:0 + 88):
+	                     81 adc 1
+	(name:0 + 89):
+	                  22 fb tin 
+	(name:0 + 91):
+	                     71 ldl 1
+	(name:0 + 92):
+	                     74 ldl 4
+	(name:0 + 93):
+	                     30 ldnl 0
+	(name:0 + 94):
+	                     d1 stl 1
+	(name:0 + 95):
+	                     71 ldl 1
+	(name:0 + 96):
+	                     f4 diff 
+	(name:0 + 97):
+	                     c0 eqc 0
+	(name:0 + 98):
+	                  60 a2 cj (name:0 + 86)
+	(name:0 + 100):
+	                     11 ldlp 1
+	(name:0 + 101):
+	                  24 f2 mint 
+	(name:0 + 103):
+	                  22 50 ldnlp 32
+	(name:0 + 105):
+	                     44 ldc 4
+	(name:0 + 106):
+	                     fb out 
+	(name:0 + 107):
+	                     71 ldl 1
+	(name:0 + 108):
+	                  60 cf eqc -1
+	(name:0 + 110):
+	                     c0 eqc 0
+	(name:0 + 111):
+	                     a7 cj (name:0 + 119)
+	(name:0 + 112):
+	                     73 ldl 3
+	(name:0 + 113):
+	                  24 f2 mint 
+	(name:0 + 115):
+	                  22 50 ldnlp 32
+	(name:0 + 117):
+	                     71 ldl 1
+	(name:0 + 118):
+	                     fb out 
+	(name:0 + 119):
+	                     40 ldc 0
+	(name:0 + 120):
+	                     74 ldl 4
+	(name:0 + 121):
+	                     e0 stnl 0
+	(name:0 + 122):
+	                     b2 ajw 2
+	(name:0 + 123):
+	                  22 f0 ret 
+	(name:0 + 125):
+	               2f 26 46 ldc 3942
+	(name:0 + 128):
+	                  21 fb ldpi 
+	(name:0 + 130):
+	            65 2f 27 48 ldc -20616
+	(name:0 + 134):
+	                  21 fb ldpi 
+	(name:0 + 136):
+	                     9e call (name:0 + 151)
+	(name:0 + 137):
+	               2f 25 4e ldc 3934
+	(name:0 + 140):
+	                  21 fb ldpi 
+	(name:0 + 142):
+	            64 2f 26 4c ldc -16532
+	(name:0 + 146):
+	                  21 fb ldpi 
+	(name:0 + 148):
+	                     92 call (name:0 + 151)
+	(name:0 + 149):
+	                  61 06 j (name:0 + 125)
+	(name:0 + 151):
+	                  60 be ajw -2
+	(name:0 + 153):
+	                     74 ldl 4
+	(name:0 + 154):
+	                     30 ldnl 0
+	(name:0 + 155):
+	                     a6 cj (name:0 + 162)
+	(name:0 + 156):
+	                  22 f2 ldtimer 
+	(name:0 + 158):
+	                  22 fb tin 
+	(name:0 + 160):
+	                  60 07 j (name:0 + 153)
+	(name:0 + 162):
+	                     11 ldlp 1
+	(name:0 + 163):
+	                  24 f2 mint 
+	(name:0 + 165):
+	                  22 50 ldnlp 32
+	(name:0 + 167):
+	                     44 ldc 4
+	(name:0 + 168):
+	                     f7 in 
+	(name:0 + 169):
+	                     71 ldl 1
+	(name:0 + 170):
+	                  60 cf eqc -1
+	(name:0 + 172):
+	                     c0 eqc 0
+	(name:0 + 173):
+	                     a7 cj (name:0 + 181)
+	(name:0 + 174):
+	                     73 ldl 3
+	(name:0 + 175):
+	                  24 f2 mint 
+	(name:0 + 177):
+	                  22 50 ldnlp 32
+	(name:0 + 179):
+	                     71 ldl 1
+	(name:0 + 180):
+	                     f7 in 
+	(name:0 + 181):
+	                     71 ldl 1
+	(name:0 + 182):
+	                     74 ldl 4
+	(name:0 + 183):
+	                     e0 stnl 0
+	(name:0 + 184):
+	                     b2 ajw 2
+	(name:0 + 185):
+	                  22 f0 ret 
+	(name:0 + 187):
+	                     00 j (name:0 + 188)
+000189: MARKER: end of area typecode 2 (SEGMENTS), area length 189
+000193: DUMMY
+000194: DUMMY
+000195: DUMMY
+000196: DUMMY

@@ -1,0 +1,105 @@
+
+../shared/litload.h,123
+#define MAX_SEGMENT_NAME_LENGTH 14,301
+#define MAX_EXPRESSION_DEPTH 19,426
+#define lit_load_debug(lit_load_debug24,567
+
+../../shared/cmd.h,349
+#define CMD_H9,175
+#define OPCODE_PFIX	12,232
+#define OPCODE_NFIX	13,259
+#define OPCODE_LDC	14,286
+#define OPCODE_OPR	15,312
+#define OPCODE_FPENTRY	16,338
+#define CMD_MAXLEN	20,417
+#define WIDEST_SLOT	21,440
+typedef long int target_word_t;target_word_t23,474
+typedef unsigned long int target_word_unsigned_t;target_word_unsigned_t24,506
+
+../../shared/config.h,277
+#define CONFIG_H9,181
+typedef long expr_const_t;expr_const_t13,294
+#define EXPR_CONST_MIN	15,322
+#define EXPR_CONST_MAX	16,354
+#define EXPR_CONST_FMT	17,386
+#define TARGET_LITTLE_ENDIAN19,415
+#define DEFAULT_SEGMENT_IDENT 24,561
+#define DEFAULT_BLOCK_THRESHOLD 27,672
+
+../../shared/expr.h,578
+#define EXPR_H9,177
+enum expr_tag expr_tag78,3357
+#define EXPR_TAG_MASK(EXPR_TAG_MASK96,3825
+#define EXPR_ISLEAF(EXPR_ISLEAF98,3866
+#define EXPR_TAG_ISLEAF(EXPR_TAG_ISLEAF99,3919
+#define EXPR_ISUNARY(EXPR_ISUNARY105,4116
+#define EXPR_TAG_ISUNARY(EXPR_TAG_ISUNARY106,4171
+#define EXPR_ISCONST(EXPR_ISCONST110,4292
+#define EXPR_TAG_ISCONST(EXPR_TAG_ISCONST111,4347
+#define EXPR_ISCOMM(EXPR_ISCOMM113,4401
+#define EXPR_TAG_ISCOMM(EXPR_TAG_ISCOMM114,4454
+#define EXPR_FREE(EXPR_FREE125,4898
+typedef struct expr *expr;expr134,5030
+struct expr expr135,5057
+
+../../shared/litio.h,638
+#define LITIO_H9,179
+#define LIT_DUMMY	53,1429
+#define LIT_DATA	54,1477
+#define LIT_CMD	55,1524
+#define LIT_NAME	56,1573
+#define LIT_NEEDS	57,1635
+#define LIT_SEGMENT	58,1684
+#define LIT_FRAGMENT	59,1740
+#define LIT_NAMEDEF	60,1798
+#define LIT_MARKER	61,1866
+#define LIT_COMMENT	62,1916
+#define LIT_NAME_DEFINED	65,1996
+#define LIT_NAME_FRAGMENT	66,2025
+#define LIT_NAME_COMMON	67,2055
+#define LIT_MARKER_LENGTH	71,2156
+#define LIT_AREA_NAMETABLE	75,2228
+#define LIT_AREA_NEEDS	76,2259
+#define LIT_AREA_SEGMENTS	77,2287
+#define LIT_AREA_DEFINITIONS	78,2317
+#define LIT_AREA_STABS	79,2350
+#define LIT_EXPR_END	84,2461
+
+../../shared/ments.h,184
+#define MENTS_H9,179
+typedef struct segment *segment;segment40,1265
+struct segment segment41,1298
+typedef struct element *element;element75,2394
+struct element element76,2427
+
+../../shared/misc.h,363
+#define MISC_H9,177
+struct error_report error_report19,579
+typedef struct name *name;name31,1016
+struct name name32,1043
+struct table table65,2406
+#define VECTOR_FULL(VECTOR_FULL93,3581
+#define VECTOR_GROW(VECTOR_GROW96,3691
+struct trace_tab trace_tab110,4207
+enum shared_trace_mask shared_trace_mask119,4434
+#define SHARED_TRACE_FLAGS 131,5107
+
+../../shared/shared.h,23
+#define SHARED_H9,181
+
+crossload.c,154
+#define MAX_IMAGE_SIZE 15,449
+usage 32,704
+xmalloc 39,809
+main 53,970
+lit_load_fatal 115,1997
+lit_load_in_byte 125,2134
+lit_load_in_block 139,2343
+
+../shared/litload.c,162
+#define INT_MIN 20,527
+#define INT_MAX 21,575
+lit_load_segment 57,2015
+lit_load_cmd_generate 220,5798
+lit_load_in_number 253,6659
+lit_load_in_expr 301,7584

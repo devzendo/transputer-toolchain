@@ -1,0 +1,32 @@
+#define	TOK_NAME	258
+#define	TOK_STRING	259
+#define	TOK_NUMBER	260
+#define	TOK_DIGLAB	261
+#define	TOK_DIGREF_B	262
+#define	TOK_DIGREF_F	263
+#define	TOK_CMD_DIRECT	264
+#define	TOK_CMD_DIRECT_PCREL	265
+#define	TOK_CMD_INDIR	266
+#define	TOK_CMD_FPU	267
+#define	TOK_BYTE	268
+#define	TOK_HALF	269
+#define	TOK_WORD	270
+#define	TOK_ALIGN	271
+#define	TOK_GLOBL	272
+#define	TOK_COMM	273
+#define	TOK_NEED	274
+#define	TOK_SLOT	275
+#define	TOK_DCOLON	276
+#define	TOK_SEGMENT	277
+#define	TOK_OROR	278
+#define	TOK_ANDAND	279
+#define	TOK_EQ	280
+#define	TOK_NE	281
+#define	TOK_LE	282
+#define	TOK_GE	283
+#define	TOK_LSH	284
+#define	TOK_RSH	285
+#define	TOP	286
+
+
+extern YYSTYPE yylval;

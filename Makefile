@@ -1,4 +1,4 @@
-DIRS=gcc-t800 # libxputer dasm ttools
+DIRS=ttools gcc-t800 # libxputer dasm
 PARACHUTEPREFIX=/opt/parachute
 
 all: setup toolchain
