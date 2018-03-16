@@ -29,10 +29,10 @@ crt0.a: crt0.o litload.o
 	rm -f crt0.a
 	ar q crt0.a crt0.o litload.o
 
-crt0.o: crt0.s
-	$(AST) -o crt0.o crt0.s
+crt0.o: crt0.ps
+	$(AST) -o crt0.o crt0.ps
 
-crt0.s: crt0.S
+crt0.ps: crt0.S
 
 litload.s: ../shared/litload.c ../shared/litload.h primitives.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -S -o litload.tmp \
@@ -97,5 +97,5 @@ clean:
 distclean: clean
 	rm -f crt0.a
 realclean: distclean
-	rm litload.s
+	rm -f litload.s
 force:

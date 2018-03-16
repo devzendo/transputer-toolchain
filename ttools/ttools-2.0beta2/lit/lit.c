@@ -6,11 +6,11 @@
  */
 
 #include "lit.h"
-
+#include <errno.h>
 
 static void output_stabs ();
 static void ifile_add (char *fname);
-static void ifile_add_member (struct ifile *master, fpos_t lo, fpos_t hi, char *);
+static void ifile_add_member (struct ifile *master, long lo, long hi, char *);
 static FILE *ifile_fopen (char *fname, char *mode);
 static int ifile_isarchive (struct ifile *);
 static void ifile_open_archive (struct ifile *);
@@ -49,9 +49,9 @@ struct ifile {
     FILE *stream_proper;	/* open file, or NULL, if closed temporarily */
     FILE **stream;		/* pointer to stream_proper in this or the
 				   archive master ifile */
-    fpos_t lo;			/* start offset; non-0 for archive members */
-    fpos_t hi;			/* end offset; ==lo+file_length */
-    fpos_t pos;			/* position saved after a pass */
+    long lo;			/* start offset; non-0 for archive members */
+    long hi;			/* end offset; ==lo+file_length */
+    long pos;			/* position saved after a pass */
     name *names;		/* index-to-name mapping table */
     int nnames;			/* number of entries in `names' */
     expr *elements;		/* index-to-element mapping table */
@@ -702,7 +702,7 @@ ifile_add (char *fname)
    ifile `master' */
 
 static void
-ifile_add_member (struct ifile *master, fpos_t lo, fpos_t hi, char *membname)
+ifile_add_member (struct ifile *master, long lo, long hi, char *membname)
 {
     struct ifile *ifi;
 
@@ -800,7 +800,7 @@ ifile_open_archive (struct ifile *ifi)
 	fatal ("cannot fseek in `%s': %s\n", ifi->fname, strerror (errno));
 
     while (fread (&header, sizeof (header), 1, *ifi->stream) == 1) {
-	fpos_t startpos = ftell (*ifi->stream);
+	long startpos = ftell (*ifi->stream);
 	long sz;
 	char *p;
 

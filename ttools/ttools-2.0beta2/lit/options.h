@@ -31,7 +31,7 @@ DEFINE_OPTION ("dump", required_argument, NULL, 'd', "\
 /* end of common options; lit-specific options follow */
 
 DEFINE_OPTION ("segment-align", required_argument, NULL, 'a', "\
--a N, --segment-align N	assume segments will be loaded at the multiple-of-N
+-a N, --segment-align N	assume segments will be loaded at the multiple-of-N \
                         boundary; default 4\n")
 
 DEFINE_OPTION ("hook", required_argument, NULL, 'h', "\

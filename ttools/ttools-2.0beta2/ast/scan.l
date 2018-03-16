@@ -12,6 +12,7 @@
 %{
 #include "ast.h"
 #include "y.tab.h"
+#include <errno.h>
 
 char *input_filename = "<UNKNOWN>";
 int input_lineno = 1;
@@ -254,6 +255,10 @@ static void mk_string_space (int leng_requested);
 "lsx"		CMDDEF (0xf9, TOK_CMD_INDIR, T9000|T450)
 "cs"		CMDDEF (0xfa, TOK_CMD_INDIR, T9000|T450)
 "csu"		CMDDEF (0xfb, TOK_CMD_INDIR, T9000|T450)
+"togglemonitor"		CMDDEF (0xfc, TOK_CMD_INDIR, T800EMUL)
+"toggledisasm"		CMDDEF (0xfd, TOK_CMD_INDIR, T800EMUL)
+"terminate"		CMDDEF (0xfe, TOK_CMD_INDIR, T800EMUL)
+"marker"		CMDDEF (0xff, TOK_CMD_INDIR, T800EMUL)
 "lddevid"	CMDDEF (0x17c, TOK_CMD_INDIR, LDDEVID)
 
 "fpstall"	CMDDEF (-0x01, TOK_CMD_INDIR, T9000)

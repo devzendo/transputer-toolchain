@@ -66,6 +66,8 @@
 
 
 /* Offsets to boot parameters from Wreg, when it points to `workspace' */
+#define L_BOOT_MEMORY_MAGIC  ((_boot_memory_magic-workspace)/4)
+#define L_BOOT_MEMORY_END  ((_boot_memory_end-workspace)/4)
 #define L_BOOT_LINK_OUT  ((_boot_link_out-workspace)/4)
 #define L_BOOT_MEMORY_START  ((_boot_memory_start-workspace)/4)
 #define L_BOOT_OLD_IPTR  ((_boot_old_iptr-workspace)/4)
@@ -114,6 +116,8 @@
 
 /* exported symbols */
 .globl @@hook
+.globl _boot_memory_magic
+.globl _boot_memory_end
 .globl _boot_link_out
 .globl _boot_memory_start
 .globl _boot_old_iptr
@@ -175,12 +179,21 @@ head2@@blocksize = 10*1024
 	   call above */
         ldl L_BOOT_MEMORY_START
         adc -(1b-@@hook)
+        stl L_BOOT_MEMORY_START
+
+	/* Initialise the end memory pointer - it should get updated later */
         ldl L_BOOT_MEMORY_START
+	/*marker*/
+        stl L_BOOT_MEMORY_END
 
         /* Compute output channel address */
         ldl L_BOOT_LINK_IN
         ldnlp -4
         stl L_BOOT_LINK_OUT
+
+	/* Just for debugging, so we can find our workspace... */
+	ldc 0x12345678
+	stl L_BOOT_MEMORY_MAGIC
 
 	/*
 	 * vital initializations
@@ -268,7 +281,7 @@ safetyspace:
 	.word ?[5]
 
 	/* Wreg is set up to point here during phase 1; just above
-           Wred is PHASE1_WORKSPACE_SZ words for use as local
+           Wreg is PHASE1_WORKSPACE_SZ words for use as local
            variables */
 workspace:
 	.word ?[PHASE1_WORKSPACE_SZ]
@@ -276,10 +289,14 @@ workspace:
 	/* Saved boot parameters visible to C code.  As these are at
            known offsets from Wreg, first phase code can access them
            as local vars using defined L_* offsets */
+_boot_memory_magic::
+	.word 0xCAFEB00B
+_boot_memory_end::
+	.word 0xDEADC0DE
 _boot_link_out::
 	.word ?
 _boot_memory_start::
-	.word ?
+	.word 0xDEADBEEF
 _boot_old_iptr::
 	.word ?
 _boot_old_wreg::
@@ -317,8 +334,8 @@ second_phase:
 
 	/* Set up segment address table (ntab) which is necessary for
 	   lit_load_segment.  It will have entries for .head, .head2,
-	   and .text; all others should have been eliminated in link
-	   lime.  Actually, refs to head2@@start should have been
+	   and .text; all others should have been eliminated at link
+	   time.  Actually, refs to head2@@start should have been
 	   eliminated as well, we put head2 into the table just so. */
 	LDPI (head@@start)	
 	stl L_NTAB
@@ -362,6 +379,11 @@ second_phase:
 	ldl L_AREA
 	add
 	stl L_AREA
+
+	/* Record last value of L_AREA for client code */
+	ldl L_AREA
+	/*marker*/
+	STS(_boot_memory_end);
 
 	/* go load next segment */
 	j 1b

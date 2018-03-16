@@ -6,7 +6,7 @@
  */
 
 #include "shared.h"
-
+#include <errno.h>
 
 /* File to input from. */
 

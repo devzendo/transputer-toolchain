@@ -208,6 +208,6 @@ int expr_name_mentioned (expr e, struct name *np);
 void expr_count_refs (expr e);
 void *name_count_refs (struct name *np);
 void expr_statistics (char *header);
-#endif NO_LIBC
+#endif /* NO_LIBC */
 
 #endif /* not EXPR_H */

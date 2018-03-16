@@ -6,6 +6,7 @@
  */
 
 #include "ast.h"
+#include <errno.h>
 
 static void output_nametable (void);
 static void output_needs (void);

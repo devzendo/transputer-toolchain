@@ -8,7 +8,7 @@
 /* LIT format object file output routines */
 
 #include "shared.h"
-
+#include <errno.h>
 
 /* File to output to.  Using global var instead of a parameter to every
    function looks reasonable; you will hardly ever want to write many files

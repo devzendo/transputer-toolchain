@@ -11,19 +11,22 @@
 # A directory which appears in the PATH; the tools are installed
 # there under native names (ast, lit, ...) for command-line usage.
 
-BINDIR=/usr/local/bin
+BINDIR=/opt/parachute/bin
+#BINDIR=/usr/local/bin
 #BINDIR=/usr/bin
 
 # Cross-tools directory with subdirs: bin, lib, include, ...
 # The tools are symlinked there under traditional names (as, ld),
 # as GCC expects to see them.
 
-TOOLDIR=/usr/local/t800
+TOOLDIR=/opt/parachute
+#TOOLDIR=/usr/local/t800
 #TOOLDIR=/usr/t800
 
 # Where to put manpages
 
-MANDIR=/usr/local/man
+MANDIR=/opt/parachute/man
+#MANDIR=/usr/local/man
 #MANDIR=/usr/man
 
 # Where is ar on your system?  We'll use it for target libraries.
@@ -85,7 +88,7 @@ LINK_H_PATH=/usr/src/transputer/driver
 # 'production' flags
 CFLAGS_DEB='-fomit-frame-pointer'
 CFLAGS_ANY='-pipe'
-CFLAGS_OPT='-O2 -m486'
+CFLAGS_OPT='-O2 -march=i486'
 CFLAGS_WRN='-Wall'
 
 # 'development' flags: used for `make devel'
@@ -200,13 +203,16 @@ check-log: force
 	@read
 
 install: all
+	#
+	[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
+	[ -d $(TOOLDIR) ] || mkdir -p $(TOOLDIR)
+	#
 	install -s -o root -g bin -m755 ast/ast $(BINDIR)
 	install -s -o root -g bin -m755 lit/lit $(BINDIR)
 	install -s -o root -g bin -m755 dast/dast $(BINDIR)
 	install -s -o root -g bin -m755 litdump/litdump $(BINDIR)
-	install -s -o root -g bin -m755 oserver/oserver $(BINDIR)
+	# install -s -o root -g bin -m755 oserver/oserver $(BINDIR)
 	#
-	[ -d $(TOOLDIR) ] || mkdir $(TOOLDIR)
 	[ -d $(TOOLDIR)/bin ] || mkdir $(TOOLDIR)/bin
 	[ -d $(TOOLDIR)/lib ] || mkdir $(TOOLDIR)/lib
 	[ -d $(TOOLDIR)/include ] || mkdir $(TOOLDIR)/include
