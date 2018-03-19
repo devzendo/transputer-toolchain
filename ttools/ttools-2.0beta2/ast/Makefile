@@ -10,7 +10,17 @@ OBJS1 = parse.o scan.o ast.o
 OBJS2 = cmd.o expr.o misc.o ments.o litout.o
 OBJS3 = version.o
 OBJS = $(OBJS1) $(OBJS2) $(OBJS3)
+
 LIBS = -lfl
+# On OSX, Flex's library is -ll, not -lfl.
+ifeq ($(OS),Windows_NT)
+detected_OS := Windows
+else
+detected_OS := $(shell uname -s)
+endif
+ifeq ($(detected_OS),Darwin)
+LIBS := -ll
+endif
 
 LFLAGS = -Ce
 YFLAGS = -d -v
@@ -27,6 +37,7 @@ CFLAGS=$(CFLAGS_INC) $(CFLAGS_OPT) $(CFLAGS_DEB) $(CFLAGS_WRN) \
 
 
 all:  ast
+	echo "Detected OS is $(detected_OS)"
 
 ast:  $(OBJS)
 	$(CC) $(LDFLAGS) -o ast $(OBJS) $(LIBS)

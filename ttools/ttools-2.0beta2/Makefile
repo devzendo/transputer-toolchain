@@ -3,6 +3,7 @@
 # This file is part of TTOOLS package.
 # Copyright (c) 1995 Yury Shevchuk <sizif@botik.ru>
 
+CC = gcc
 
 ### Tunable parameters
 
@@ -88,7 +89,7 @@ LINK_H_PATH=/usr/src/transputer/driver
 # 'production' flags
 CFLAGS_DEB='-fomit-frame-pointer'
 CFLAGS_ANY='-pipe'
-CFLAGS_OPT='-O2 -march=i486'
+CFLAGS_OPT='-O2'
 CFLAGS_WRN='-Wall'
 
 # 'development' flags: used for `make devel'

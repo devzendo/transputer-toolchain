@@ -744,10 +744,10 @@ char *tab_indir[] = {
 	"lsx",	/* 0xf9 */
 	"cs",	/* 0xfa */
 	"csu",	/* 0xfb */
-	NULL,	/* 0xfc */
-	NULL,	/* 0xfd */
-	NULL,	/* 0xfe */
-	NULL,	/* 0xff */
+	"togglemonitor",	/* 0xfc */
+	"toggledisasm",	/* 0xfd */
+	"terminate",	/* 0xfe */
+	"marker",	/* 0xff */
 	NULL,	/* 0x100 */
 	NULL,	/* 0x101 */
 	NULL,	/* 0x102 */
