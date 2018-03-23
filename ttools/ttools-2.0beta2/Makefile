@@ -102,7 +102,8 @@ DEVEL_CFLAGS_WRN='-Wall'
 
 
 # List of directories to run sub-make's in
-DIRS=ast lit litdump dast startups/absolute startups/linkboot
+DIRS=ast lit litdump dast
+STARTUPDIRS=startups/absolute startups/linkboot
 
 # `make test' uses this list instead of DIRS
 TESTDIRS=test/pushpull test/cross-test startups/linkboot
@@ -124,7 +125,12 @@ MAYBETEST=test
 
 all:
 	@echo "Making all in subdirectories..."
-	@for d in $(DIRS); do (cd $$d; make $(SUBFLAGS) all) || exit 1; done
+	@for d in $(DIRS); do (cd $$d; echo "*** Subdirectory $$d ***"; make $(SUBFLAGS) all) || exit 1; done
+
+# Requires t800-gcc
+startups:
+	@echo "Making all in startup subdirectories..."
+	@for d in $(STARTUPDIRS); do (cd $$d; echo "*** Subdirectory $$d ***"; make $(SUBFLAGS) all) || exit 1; done
 
 devel:
 	make "CFLAGS_DEB=$(DEVEL_CFLAGS_DEB)"	\
@@ -220,23 +226,27 @@ install: all
 	$(LN) $(BINDIR)/ast $(TOOLDIR)/bin/as
 	$(LN) $(BINDIR)/lit $(TOOLDIR)/bin/ld
 	$(LN) $(PATH_AR) $(TOOLDIR)/bin/ar
-	install -o root -g root $(CRT0) -m644 $(TOOLDIR)/lib/crt0.o
 	#
 	[ -d $(MANDIR) ] || mkdir $(MANDIR)
 	[ -d $(MANDIR)/man1 ] || mkdir $(MANDIR)/man1
 	[ -d $(MANDIR)/man5 ] || mkdir $(MANDIR)/man5
-	install -o root -g root -m644 docs/ast.1 $(MANDIR)/man1
+	install -o root -g wheel -m644 docs/ast.1 $(MANDIR)/man1
 	$(COMPRESS) $(MANDIR)/man1/ast.1
-	install -o root -g root -m644 docs/dast.1 $(MANDIR)/man1
+	install -o root -g wheel -m644 docs/dast.1 $(MANDIR)/man1
 	$(COMPRESS) $(MANDIR)/man1/dast.1
-	install -o root -g root -m644 docs/lit.1 $(MANDIR)/man1
+	install -o root -g wheel -m644 docs/lit.1 $(MANDIR)/man1
 	$(COMPRESS) $(MANDIR)/man1/lit.1
-	install -o root -g root -m644 docs/lit.5 $(MANDIR)/man5
+	install -o root -g wheel -m644 docs/lit.5 $(MANDIR)/man5
 	$(COMPRESS) $(MANDIR)/man5/lit.5
-	install -o root -g root -m644 docs/litdump.1 $(MANDIR)/man1
+	install -o root -g wheel -m644 docs/litdump.1 $(MANDIR)/man1
 	$(COMPRESS) $(MANDIR)/man1/litdump.1
-	install -o root -g root -m644 docs/ttools.1 $(MANDIR)/man1
+	install -o root -g wheel -m644 docs/ttools.1 $(MANDIR)/man1
 	$(COMPRESS) $(MANDIR)/man1/ttools.1
+
+install-startups: startups
+	#
+	[ -d $(TOOLDIR)/lib ] || mkdir -p $(TOOLDIR)/lib
+	install -o root -g root $(CRT0) -m644 $(TOOLDIR)/lib/crt0.o
 
 test: force
 	@echo "Making test in subdirectories..."
