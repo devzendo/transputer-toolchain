@@ -47,7 +47,7 @@ ALLOCA_FINISH = true
 # to the stage2 and stage3 compilations
 # XCFLAGS is used for most compilations but not when using the GCC just built.
 XCFLAGS =
-CFLAGS = -g -ansi 
+CFLAGS = -g
 BOOT_CFLAGS = -O $(CFLAGS)
 # These exists to be overridden by the x-* and t-* files, respectively.
 X_CFLAGS =
