@@ -17,7 +17,7 @@ LITFLAGS =
 # ... binary ones
 TARGETS_BIN = pushpull.o pushpull pushpull.image
 # ... text ones
-TARGETS_TEXT = pushpull.s pushpull.o.dump pushpull.o.dump2 \
+TARGETS_TEXT = pushpull.ps pushpull.o.dump pushpull.o.dump2 \
                pushpull.dump pushpull.dump2 pushpull.das
 
 all: test
@@ -25,10 +25,10 @@ test: compile compare
 
 compile: $(TARGETS_BIN) $(TARGETS_TEXT)
 
-pushpull.s: pushpull.S	# no force, ok
-	gcc -E pushpull.S > pushpull.s
-pushpull.o: force pushpull.s
-	$(AST) -o pushpull.o $(ASTFLAGS) pushpull.s
+pushpull.ps: pushpull.S	# no force, ok
+	gcc -E pushpull.S > pushpull.ps
+pushpull.o: force pushpull.ps
+	$(AST) -o pushpull.o $(ASTFLAGS) pushpull.ps
 pushpull: force pushpull.o 
 	$(LIT) -o pushpull $(LITFLAGS) pushpull.o
 pushpull.image: force pushpull

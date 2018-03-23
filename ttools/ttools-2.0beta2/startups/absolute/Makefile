@@ -12,7 +12,7 @@ CFLAGS_DEB=-g
 CFLAGS_DEF=
 CFLAGS_INC=-I../shared -I../../shared
 CFLAGS_ANY=-pipe
-CFLAGS_OPT=-O2 -m486
+CFLAGS_OPT=-O2
 CFLAGS_WRN=-Wall
 
 CFLAGS=$(CFLAGS_INC) $(CFLAGS_OPT) $(CFLAGS_DEB) $(CFLAGS_WRN) \
@@ -20,12 +20,14 @@ CFLAGS=$(CFLAGS_INC) $(CFLAGS_OPT) $(CFLAGS_DEB) $(CFLAGS_WRN) \
 
 all: crt0.o crossload
 
-crt0.o: crt0.s
-	../../ast/ast -o crt0.o crt0.s
+crt0.ps: crt0.S
+	$(PREPROCESS.S) $< > $@
+
+crt0.o: crt0.ps
+	../../ast/ast -o crt0.o crt0.ps
 
 crossload: $(OBJS)
 	$(CC) $(LDFLAGS) -o crossload $(OBJS) $(LIBS)
-	
 
 depend dep:
 	for i in *.c; do $(CC) $(CFLAGS) -MM $$i; done > Depend
@@ -49,7 +51,7 @@ TAGS: force
 	etags *.h ../shared/*.h ../../shared/*.h *.c ../shared/*.c
 
 clean:
-	-rm -f *.s a.out
+	-rm -f *.s *.ps a.out
 distclean: clean
 	-rm -f *.o crossload
 realclean: distclean
