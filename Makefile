@@ -2,20 +2,23 @@ DIRS=gcc-t800 ttools # libxputer dasm
 PARACHUTEPREFIX=/opt/parachute
 export PARACHUTEPREFIX
 
+OWNER=${USER:=$(/usr/bin/id -run)}
+
 all: setup toolchain
 
 setup:
 	@sudo mkdir -p $(PARACHUTEPREFIX)
-	@sudo mkdir -p $(PARACHUTEPREFIX)/lib
-	@sudo mkdir -p $(PARACHUTEPREFIX)/bin
-	@sudo mkdir -p $(PARACHUTEPREFIX)/include
-	@sudo mkdir -p $(PARACHUTEPREFIX)/man
-	@sudo mkdir -p $(PARACHUTEPREFIX)/info
+	@sudo chown $(OWNER):$(OWNER) $(PARACHUTEPREFIX)
+	mkdir -p $(PARACHUTEPREFIX)/lib
+	mkdir -p $(PARACHUTEPREFIX)/bin
+	mkdir -p $(PARACHUTEPREFIX)/include
+	mkdir -p $(PARACHUTEPREFIX)/man
+	mkdir -p $(PARACHUTEPREFIX)/info
 	# Weird hierarchy, needed for gcc build..?
-	@sudo mkdir -p $(PARACHUTEPREFIX)/t800
-	@sudo mkdir -p $(PARACHUTEPREFIX)/t800/bin
-	@sudo mkdir -p $(PARACHUTEPREFIX)/t800/lib
-	@sudo mkdir -p $(PARACHUTEPREFIX)/t800/include
+	mkdir -p $(PARACHUTEPREFIX)/t800
+	mkdir -p $(PARACHUTEPREFIX)/t800/bin
+	mkdir -p $(PARACHUTEPREFIX)/t800/lib
+	mkdir -p $(PARACHUTEPREFIX)/t800/include
 
 toolchain:
 	(cd ttools; make all) || exit 1
