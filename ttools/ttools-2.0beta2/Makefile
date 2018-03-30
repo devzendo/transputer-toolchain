@@ -102,8 +102,8 @@ DEVEL_CFLAGS_WRN='-Wall'
 
 
 # List of directories to run sub-make's in
-DIRS=ast lit litdump dast
-STARTUPDIRS=startups/absolute startups/linkboot
+DIRS=ast lit litdump dast startups/absolute
+STARTUPDIRS=startups/linkboot
 
 # `make test' uses this list instead of DIRS
 TESTDIRS=test/pushpull test/cross-test startups/linkboot
