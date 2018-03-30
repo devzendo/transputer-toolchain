@@ -235,9 +235,11 @@ main (int argc, char **argv)
 	case LIT_CMD:
 	    {
 		expr arg, size;
-
+		printf("reading n...\n");
 		n = lit_in_number ();
+		printf("reading arg...\n");
 		arg = lit_in_expr ();
+		printf("reading size...\n");
 		size = lit_in_expr ();
 
 		printf ("element #%d CMD 0x%02lx", nelements, n);

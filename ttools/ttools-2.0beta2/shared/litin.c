@@ -17,19 +17,27 @@ char *lit_in_file_name = "?";
 
 int lit_in_string_len;	
 
+int
+getc_lit_in_file()
+{
+    int c = getc (lit_in_file);
+    printf("GETC 0x%02x\n", c & 0x00ff);
+    return c;
+}
 
 /* Input encoded NUMBER from the `lit_in_file'.  Return the number read. */
 
 long
 lit_in_number ()
 {
+    printf("start lit_in_number\n");
     int invert = 0;
     long number = 0;
-    int c = getc (lit_in_file);
+    int c = getc_lit_in_file();
     
     if (c == 255) {
 	invert++;
-	c = getc (lit_in_file);
+    	c = getc_lit_in_file();
     }
 
     switch (c) {
@@ -42,17 +50,17 @@ lit_in_number ()
 		"eight-byte encoded numbers not supported\n");
 	return 0;
     case 253:
-	number |= (c = getc (lit_in_file));
-	number |= (c = getc (lit_in_file)) << 8;
-	number |= (c = getc (lit_in_file)) << 16;
-	number |= (c = getc (lit_in_file)) << 24;
+	number |= (c = getc_lit_in_file());
+	number |= (c = getc_lit_in_file()) << 8;
+	number |= (c = getc_lit_in_file()) << 16;
+	number |= (c = getc_lit_in_file()) << 24;
 	break;
     case 252:
-	number |= (c = getc (lit_in_file));
-	number |= (c = getc (lit_in_file)) << 8;
+	number |= (c = getc_lit_in_file());
+	number |= (c = getc_lit_in_file()) << 8;
 	break;
     case 251:
-	number |= (c = getc (lit_in_file));
+	number |= (c = getc_lit_in_file());
 	break;
     default:
 	number = c;
@@ -63,7 +71,7 @@ lit_in_number ()
 
     if (invert)
 	number = ~number;
-
+    printf("end lit_in_number: 0x%08lx\n", number);
     return number;
 }
 
@@ -73,6 +81,7 @@ lit_in_number ()
 char *
 lit_in_block (size_t len)
 {
+    printf("start lit_in_block\n");
     char *blk = (char *) xmalloc (len);
 
     if (fread (blk, 1, len, lit_in_file) != len)
@@ -86,6 +95,7 @@ lit_in_block (size_t len)
 char *
 lit_in_string ()
 {
+    printf("start lit_in_string\n");
     int len = lit_in_number ();
     char *str = (char *) xmalloc (len+1);
 
@@ -95,6 +105,7 @@ lit_in_string ()
     str[len] = '\0';
 
     lit_in_string_len = len;
+    printf("end lit_in_string [%s]\n", str);
     return str;
 }
 
@@ -107,7 +118,9 @@ lit_in_expr ()
     long tag;
     expr e;
 
+    printf("start lit_in_expr\n");
     while ((tag = lit_in_number ()) != LIT_EXPR_END) {
+	    printf("  expr tag %0ld\n", tag);
 
 	if (tag < 0 || tag >= EXPR_TAG_COUNT)
 	    fatal ("%s: %u: invalid expression tag %d\n",
@@ -175,6 +188,7 @@ lit_in_expr ()
 	fatal ("%s: %u: premature LIT_EXPR_END\n",
 	       lit_in_file_name, ftell (lit_in_file));
 
+    printf("end lit_in_expr\n");
     return estack[0];
 }
 
