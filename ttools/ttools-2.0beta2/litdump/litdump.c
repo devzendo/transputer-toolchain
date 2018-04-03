@@ -66,6 +66,7 @@ usage (char *errstr, enum usage_flavor flavor, int exit_code)
 int
 main (int argc, char **argv)
 {
+    int hexoffset = 0;
     int disflag = 0;
     static int dummy = 0;
     int c;
@@ -114,6 +115,10 @@ main (int argc, char **argv)
 	    }
 	    break;
 
+	case 'h':
+	    hexoffset++;
+	    break;
+
 	default:
 	    abort ();
 	}
@@ -144,7 +149,10 @@ main (int argc, char **argv)
 	    break;
 	ungetc (c, lit_in_file);
 
-	printf ("%06ld: ", ftell (lit_in_file));
+	if (hexoffset)
+		printf ("%06lx: ", ftell (lit_in_file));
+	else
+		printf ("%06ld: ", ftell (lit_in_file));
 
 	tag = lit_in_number ();
 	if (tag < INT_MIN || tag > INT_MAX) {
