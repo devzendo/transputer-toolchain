@@ -15,3 +15,6 @@ DEFINE_OPTION ("expr-print-long", no_argument, NULL, 'E', "\
 DEFINE_OPTION ("disassemble", required_argument, NULL, 'd', "\
 -d S, --disassemble S	show CMD and BLOCK elements in the segment S\n\
 			as machine instructions\n")
+
+DEFINE_OPTION ("hexoffset", no_argument, NULL, 'h', "\
+-h, --hexoffset		show offsets in hexadecimal rather than decimal\n")
