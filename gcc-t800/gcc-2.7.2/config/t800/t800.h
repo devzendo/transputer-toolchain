@@ -1495,13 +1495,15 @@ bss_section ()							\
 	       INTVAL (EXP))    					\
     : (abort (),0))
 
+/* Used to print chars if they were printable, else, octal numbers prefixed with \
+   But the octal stopped working... so just print as numbers now if not printable */
 #define ASM_OUTPUT_CHAR(STREAM, EXP) \
   (GET_CODE (EXP) == CONST_INT						\
     ? fprintf (STREAM,							\
                (unsigned char) INTVAL (EXP) >= ' '			\
                && INTVAL (EXP) != '\177'				\
                  ? "\t.byte '%c'\n"					\
-                 : "\t.byte '\\%o'\n", (unsigned char) INTVAL (EXP))	\
+                 : "\t.byte 0x%02x\n", (unsigned char) INTVAL (EXP))	\
     : (abort (),0))
 
 #define ASM_OUTPUT_BYTE(STREAM, VALUE) \

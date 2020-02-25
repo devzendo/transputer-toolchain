@@ -13,7 +13,7 @@
 FILE *lit_in_file = NULL;
 char *lit_in_file_name = "?";
 
-/* lit_in_string leaves the legth of the string here */
+/* lit_in_string leaves the length of the string here */
 
 int lit_in_string_len;	
 

@@ -147,7 +147,7 @@ swap_last_fragments (segment seg)
 
 /*
  * Emit functions add new elements of all sorts
- * to the curent chain of elements.
+ * to the current chain of elements.
  */
 
 /* Emit a plain byte sequence. */
@@ -473,6 +473,7 @@ pass_optimize_offsets ()
 	    element el;
 	    int elno = 0;
 	    expr temp;
+	    /*printf("top of loop minsz %d maxsz %d\n", minsz, maxsz);*/
 
 	    for (el = seg->fragments[j].elts; el; el = el->next, elno++) {
 
@@ -535,6 +536,8 @@ pass_optimize_offsets ()
 		/* if recomputed size does not match the old size,
 		   write the new size into el->size and count the
 		   shrinkage */
+/*	    printf("minsz %d maxsz %d\n", minsz, maxsz);
+		printf("u.range.low %d u.range.hi %d\n", el->size->u.range.lo, el->size->u.range.hi);*/
 		if (el->size->u.range.lo != minsz
 		    || el->size->u.range.hi != maxsz) {
 

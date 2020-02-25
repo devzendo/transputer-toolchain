@@ -30,11 +30,12 @@ int
 lit_out_number (long number)
 {
     int ret = 0;
-
+    printf("original number is %ld or 0x%08lX\n", number, number);
     if (number < 0 && number >= ~0xffff) {
 	if (putc (255, lit_out_file) == EOF)
 	    fatal ("%s: %s", lit_out_file_name, strerror (errno));
 	number = ~number;
+	printf("inverted number is %ld or 0x%08lX\n", number, number);
 	ret++;
     }
 
